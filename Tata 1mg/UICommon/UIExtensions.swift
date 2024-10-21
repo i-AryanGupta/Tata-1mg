@@ -49,9 +49,18 @@ extension Color{
     static var primaryApp: Color{
         return Color(red: 248 / 255, green: 151 / 255, blue: 12 / 255)
     }
+    
+    static var btnBGCell: Color {
+        return Color.white
+    }
+    
+    static var btnCellText: Color {
+        return Color.orange
+    }
 }
 
 extension View{
+    
     func cornerRadius( _ radius: CGFloat, corner: UIRectCorner ) -> some View {
         clipShape( RoundedCorner(radius: radius, corner: corner) )
     }

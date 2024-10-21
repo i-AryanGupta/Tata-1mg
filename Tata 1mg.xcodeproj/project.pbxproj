@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B0B79F72CC62607005091D4 /* HomePageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79F62CC62607005091D4 /* HomePageView.swift */; };
+		2B0B79FA2CC626F7005091D4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79F92CC626F7005091D4 /* SignUpView.swift */; };
+		2B0B79FC2CC6292A005091D4 /* UITextFieldAndButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79FB2CC6292A005091D4 /* UITextFieldAndButton.swift */; };
+		2B0B79FE2CC62C82005091D4 /* KeyboardResponsiveModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79FD2CC62C82005091D4 /* KeyboardResponsiveModifier.swift */; };
+		2B0B7A002CC632D6005091D4 /* ProductCellDataReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */; };
+		2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7A022CC633BF005091D4 /* PopUpView.swift */; };
+		2B0B7A052CC63500005091D4 /* addedProductButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7A042CC63500005091D4 /* addedProductButton.swift */; };
 		2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423C2CC237770031B39D /* Tata_1mgApp.swift */; };
 		2B92423F2CC237770031B39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423E2CC237770031B39D /* ContentView.swift */; };
 		2B9242412CC237780031B39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9242402CC237780031B39D /* Assets.xcassets */; };
@@ -22,9 +29,17 @@
 		2B9242622CC23B100031B39D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9242612CC23B100031B39D /* Launch Screen.storyboard */; };
 		2B9242652CC2432E0031B39D /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9242642CC2432E0031B39D /* OnboardingScreen.swift */; };
 		2B9242672CC265E60031B39D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9242662CC265E60031B39D /* LogInView.swift */; };
+		2BE3320B2CC272D10047BFB7 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE3320A2CC272D10047BFB7 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B0B79F62CC62607005091D4 /* HomePageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageView.swift; sourceTree = "<group>"; };
+		2B0B79F92CC626F7005091D4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		2B0B79FB2CC6292A005091D4 /* UITextFieldAndButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldAndButton.swift; sourceTree = "<group>"; };
+		2B0B79FD2CC62C82005091D4 /* KeyboardResponsiveModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardResponsiveModifier.swift; sourceTree = "<group>"; };
+		2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellDataReusable.swift; sourceTree = "<group>"; };
+		2B0B7A022CC633BF005091D4 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
+		2B0B7A042CC63500005091D4 /* addedProductButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedProductButton.swift; sourceTree = "<group>"; };
 		2B9242392CC237770031B39D /* Tata 1mg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tata 1mg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B92423C2CC237770031B39D /* Tata_1mgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tata_1mgApp.swift; sourceTree = "<group>"; };
 		2B92423E2CC237770031B39D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,7 +48,7 @@
 		2B9242452CC237780031B39D /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2B9242482CC237790031B39D /* Tata_1mg.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tata_1mg.xcdatamodel; sourceTree = "<group>"; };
 		2B9242532CC238C10031B39D /* UIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
-		2B9242552CC239720031B39D /* Tata-1mg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tata-1mg-Info.plist"; path = "Tata 1mg/Fonts/Tata-1mg-Info.plist"; sourceTree = SOURCE_ROOT; };
+		2B9242552CC239720031B39D /* Tata-1mg-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tata-1mg-Info.plist"; path = "Tata 1mg/Tata-1mg-Info.plist"; sourceTree = SOURCE_ROOT; };
 		2B9242572CC239A70031B39D /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
 		2B9242582CC239A70031B39D /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
 		2B9242592CC239A70031B39D /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
@@ -42,6 +57,7 @@
 		2B9242612CC23B100031B39D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2B9242642CC2432E0031B39D /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		2B9242662CC265E60031B39D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		2BE3320A2CC272D10047BFB7 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +71,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0B79F82CC62614005091D4 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2B0B79F62CC62607005091D4 /* HomePageView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2B0B7A012CC633A8005091D4 /* DetailProduct */ = {
+			isa = PBXGroup;
+			children = (
+				2B0B7A022CC633BF005091D4 /* PopUpView.swift */,
+				2B0B7A042CC63500005091D4 /* addedProductButton.swift */,
+			);
+			path = DetailProduct;
+			sourceTree = "<group>";
+		};
 		2B9242302CC237760031B39D = {
 			isa = PBXGroup;
 			children = (
@@ -74,6 +107,7 @@
 		2B92423B2CC237770031B39D /* Tata 1mg */ = {
 			isa = PBXGroup;
 			children = (
+				2B9242552CC239720031B39D /* Tata-1mg-Info.plist */,
 				2B9242522CC237DE0031B39D /* ViewModel */,
 				2B9242512CC237D50031B39D /* View */,
 				2B9242502CC237CD0031B39D /* Model */,
@@ -101,7 +135,11 @@
 		2B92424F2CC2379F0031B39D /* UICommon */ = {
 			isa = PBXGroup;
 			children = (
+				2B0B7A012CC633A8005091D4 /* DetailProduct */,
 				2B9242532CC238C10031B39D /* UIExtensions.swift */,
+				2B0B79FB2CC6292A005091D4 /* UITextFieldAndButton.swift */,
+				2B0B79FD2CC62C82005091D4 /* KeyboardResponsiveModifier.swift */,
+				2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */,
 			);
 			path = UICommon;
 			sourceTree = "<group>";
@@ -109,6 +147,7 @@
 		2B9242502CC237CD0031B39D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2BE3320A2CC272D10047BFB7 /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -116,6 +155,7 @@
 		2B9242512CC237D50031B39D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2B0B79F82CC62614005091D4 /* Home */,
 				2B9242632CC243180031B39D /* Login */,
 			);
 			path = View;
@@ -136,7 +176,6 @@
 				2B9242592CC239A70031B39D /* Poppins-Medium.ttf */,
 				2B92425A2CC239A80031B39D /* Poppins-SemiBold.ttf */,
 				2B9242582CC239A70031B39D /* Poppins-Bold.ttf */,
-				2B9242552CC239720031B39D /* Tata-1mg-Info.plist */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -146,6 +185,7 @@
 			children = (
 				2B9242642CC2432E0031B39D /* OnboardingScreen.swift */,
 				2B9242662CC265E60031B39D /* LogInView.swift */,
+				2B0B79F92CC626F7005091D4 /* SignUpView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -227,11 +267,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B9242462CC237780031B39D /* Persistence.swift in Sources */,
+				2B0B7A002CC632D6005091D4 /* ProductCellDataReusable.swift in Sources */,
+				2BE3320B2CC272D10047BFB7 /* Product.swift in Sources */,
 				2B9242672CC265E60031B39D /* LogInView.swift in Sources */,
 				2B92423F2CC237770031B39D /* ContentView.swift in Sources */,
 				2B9242652CC2432E0031B39D /* OnboardingScreen.swift in Sources */,
 				2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */,
+				2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */,
+				2B0B79FA2CC626F7005091D4 /* SignUpView.swift in Sources */,
 				2B9242542CC238C10031B39D /* UIExtensions.swift in Sources */,
+				2B0B79FC2CC6292A005091D4 /* UITextFieldAndButton.swift in Sources */,
+				2B0B7A052CC63500005091D4 /* addedProductButton.swift in Sources */,
+				2B0B79F72CC62607005091D4 /* HomePageView.swift in Sources */,
+				2B0B79FE2CC62C82005091D4 /* KeyboardResponsiveModifier.swift in Sources */,
 				2B9242492CC237790031B39D /* Tata_1mg.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
