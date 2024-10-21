@@ -13,8 +13,13 @@ struct Tata_1mgApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView{
+                OnboardingScreen()
+            }
+            .navigationViewStyle(.stack)
+            
+//            ContentView()
+//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
