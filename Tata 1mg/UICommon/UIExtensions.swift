@@ -45,6 +45,10 @@ extension Color{
     static var btnBG: Color {
         return Color(red: 248 / 255, green: 151 / 255, blue: 12 / 255)
     }
+    
+    static var primaryApp: Color{
+        return Color(red: 248 / 255, green: 151 / 255, blue: 12 / 255)
+    }
 }
 
 extension View{
@@ -82,6 +86,27 @@ struct RoundedCorner: Shape {
         let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corner, cornerRadii: CGSize(width: radius, height: radius))
         
         return Path(path.cgPath)
+    }
+}
+
+extension CGFloat{
+    
+    static var screenWidth: Double{
+        return UIScreen.main.bounds.size.width
+    }
+    
+    static var screenHight: Double{
+        return UIScreen.main.bounds.size.height
+    }
+    
+    static func widthPer(per: Double) -> Double{
+        return screenWidth * per
+        // 300 * .5 = 50% width return
+    }
+    
+    static func heightPer(per: Double) -> Double{
+        return screenHight * per
+        // 300 * .5 = 50% height return
     }
 }
 
