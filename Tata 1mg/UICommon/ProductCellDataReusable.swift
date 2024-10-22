@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ProductCellDataReusable: View {
     var didAddCart: (() -> ())?
-    var image = "pill"
+    var image = "pills1"
     var name = "Paracetamol"
     var price = "190.00"
     var delivery = "delivery by 11 pm"

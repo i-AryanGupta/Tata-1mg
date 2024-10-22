@@ -61,7 +61,7 @@ struct LogInView: View {
             }
         }
         .keyboardResponsive(isKeyboardVisible: $isKeyboardVisible) // Apply the keyboard responsive modifier
-        .bgNavLink(content: HomePageView(), isAction: $onSubmit)
+        .bgNavLink(content: HealthPlansView(), isAction: $onSubmit)
         .bgNavLink(content: SignUpView(), isAction: $onSignUp)
     }
 }

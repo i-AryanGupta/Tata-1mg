@@ -14,6 +14,9 @@
 		2B0B7A002CC632D6005091D4 /* ProductCellDataReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */; };
 		2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7A022CC633BF005091D4 /* PopUpView.swift */; };
 		2B0B7A052CC63500005091D4 /* addedProductButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7A042CC63500005091D4 /* addedProductButton.swift */; };
+		2B0B7A072CC65409005091D4 /* SearchBarProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B0B7A062CC65409005091D4 /* SearchBarProductView.swift */; };
+		2B216B552CC78779002AF809 /* TopSelfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B216B542CC78779002AF809 /* TopSelfSection.swift */; };
+		2B216B582CC7938C002AF809 /* HealthPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B216B572CC7938C002AF809 /* HealthPlansView.swift */; };
 		2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423C2CC237770031B39D /* Tata_1mgApp.swift */; };
 		2B92423F2CC237770031B39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423E2CC237770031B39D /* ContentView.swift */; };
 		2B9242412CC237780031B39D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9242402CC237780031B39D /* Assets.xcassets */; };
@@ -40,6 +43,9 @@
 		2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellDataReusable.swift; sourceTree = "<group>"; };
 		2B0B7A022CC633BF005091D4 /* PopUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpView.swift; sourceTree = "<group>"; };
 		2B0B7A042CC63500005091D4 /* addedProductButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addedProductButton.swift; sourceTree = "<group>"; };
+		2B0B7A062CC65409005091D4 /* SearchBarProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarProductView.swift; sourceTree = "<group>"; };
+		2B216B542CC78779002AF809 /* TopSelfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSelfSection.swift; sourceTree = "<group>"; };
+		2B216B572CC7938C002AF809 /* HealthPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPlansView.swift; sourceTree = "<group>"; };
 		2B9242392CC237770031B39D /* Tata 1mg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tata 1mg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B92423C2CC237770031B39D /* Tata_1mgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tata_1mgApp.swift; sourceTree = "<group>"; };
 		2B92423E2CC237770031B39D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				2B0B79F62CC62607005091D4 /* HomePageView.swift */,
+				2B0B7A062CC65409005091D4 /* SearchBarProductView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -86,6 +93,22 @@
 				2B0B7A042CC63500005091D4 /* addedProductButton.swift */,
 			);
 			path = DetailProduct;
+			sourceTree = "<group>";
+		};
+		2B216B532CC7872A002AF809 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+				2B216B542CC78779002AF809 /* TopSelfSection.swift */,
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		2B216B562CC79376002AF809 /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				2B216B572CC7938C002AF809 /* HealthPlansView.swift */,
+			);
+			path = TabView;
 			sourceTree = "<group>";
 		};
 		2B9242302CC237760031B39D = {
@@ -116,6 +139,7 @@
 				2B92424F2CC2379F0031B39D /* UICommon */,
 				2B9242562CC2397B0031B39D /* Fonts */,
 				2B9242402CC237780031B39D /* Assets.xcassets */,
+				2B216B532CC7872A002AF809 /* UIComponent */,
 				2B9242452CC237780031B39D /* Persistence.swift */,
 				2B9242472CC237790031B39D /* Tata_1mg.xcdatamodeld */,
 				2B9242422CC237780031B39D /* Preview Content */,
@@ -155,6 +179,7 @@
 		2B9242512CC237D50031B39D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				2B216B562CC79376002AF809 /* TabView */,
 				2B0B79F82CC62614005091D4 /* Home */,
 				2B9242632CC243180031B39D /* Login */,
 			);
@@ -267,10 +292,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B9242462CC237780031B39D /* Persistence.swift in Sources */,
+				2B216B552CC78779002AF809 /* TopSelfSection.swift in Sources */,
 				2B0B7A002CC632D6005091D4 /* ProductCellDataReusable.swift in Sources */,
 				2BE3320B2CC272D10047BFB7 /* Product.swift in Sources */,
 				2B9242672CC265E60031B39D /* LogInView.swift in Sources */,
+				2B0B7A072CC65409005091D4 /* SearchBarProductView.swift in Sources */,
 				2B92423F2CC237770031B39D /* ContentView.swift in Sources */,
+				2B216B582CC7938C002AF809 /* HealthPlansView.swift in Sources */,
 				2B9242652CC2432E0031B39D /* OnboardingScreen.swift in Sources */,
 				2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */,
 				2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */,
