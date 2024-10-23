@@ -146,7 +146,7 @@ class ProductsFile {
 
         
         ProductCellData(productName: "Pill",
-                        productImages: ["pills1, pills2, pills3"],
+                        productImages: ["pills2", "pills1", "pills3"],
                         productPrice: 150.30,
                         productDiscountedPrice: 125.30,
                         productType: "Medicine",
