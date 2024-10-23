@@ -56,7 +56,7 @@ struct HomePageView: View {
                                         .fontWeight(.bold)
                                         .foregroundColor(.white)
                                         .frame(width: 20, height: 20)
-                                        .background(Color.red)
+                                        .background(Color.orange)
                                         .clipShape(Circle())
                                         .offset(x: -10, y: -10)
                                 }
@@ -101,6 +101,17 @@ struct HomePageView: View {
                             }
                             .padding(.horizontal)
                         }
+                        
+                        Text("Last minute buy")
+                            .font(.headline)
+                            .padding(.leading, 20)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
+                                productStack(for: "Medicine")
+                            }
+                            .padding(.horizontal)
+                        }
                     }
                     .padding(.horizontal)
                     
@@ -109,6 +120,7 @@ struct HomePageView: View {
         } // NavigationView
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
+        // Replace .sheet with your custom .bgNavLink for CartView and LocationView
         .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
         //.bgNavLink(content: LocationView(), isAction: $showLocation)
     }
@@ -125,9 +137,9 @@ struct HomePageView: View {
 
 
 
-
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
+        
         HomePageView()
     }
 }
