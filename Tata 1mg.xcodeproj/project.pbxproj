@@ -18,6 +18,8 @@
 		2B20A35F2CC8C534001F39E9 /* CartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20A35E2CC8C534001F39E9 /* CartView.swift */; };
 		2B20A3632CC8C9E6001F39E9 /* CartItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20A3622CC8C9E6001F39E9 /* CartItem.swift */; };
 		2B20A3652CC8CA01001F39E9 /* CartViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20A3642CC8CA01001F39E9 /* CartViewModel.swift */; };
+		2B20A3672CC8DF8F001F39E9 /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20A3662CC8DF8F001F39E9 /* TestView.swift */; };
+		2B20A36B2CC8EA3E001F39E9 /* DetailCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20A36A2CC8EA3E001F39E9 /* DetailCart.swift */; };
 		2B216B552CC78779002AF809 /* TopSelfSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B216B542CC78779002AF809 /* TopSelfSection.swift */; };
 		2B216B582CC7938C002AF809 /* HealthPlansView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B216B572CC7938C002AF809 /* HealthPlansView.swift */; };
 		2B73C52A2CC8BB230018133D /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73C5292CC8BB230018133D /* HomeTabView.swift */; };
@@ -53,6 +55,8 @@
 		2B20A35E2CC8C534001F39E9 /* CartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartView.swift; sourceTree = "<group>"; };
 		2B20A3622CC8C9E6001F39E9 /* CartItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItem.swift; sourceTree = "<group>"; };
 		2B20A3642CC8CA01001F39E9 /* CartViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewModel.swift; sourceTree = "<group>"; };
+		2B20A3662CC8DF8F001F39E9 /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		2B20A36A2CC8EA3E001F39E9 /* DetailCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCart.swift; sourceTree = "<group>"; };
 		2B216B542CC78779002AF809 /* TopSelfSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopSelfSection.swift; sourceTree = "<group>"; };
 		2B216B572CC7938C002AF809 /* HealthPlansView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthPlansView.swift; sourceTree = "<group>"; };
 		2B73C5292CC8BB230018133D /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
@@ -111,13 +115,30 @@
 			isa = PBXGroup;
 			children = (
 				2B20A35E2CC8C534001F39E9 /* CartView.swift */,
+				2B20A3662CC8DF8F001F39E9 /* TestView.swift */,
 			);
 			path = Cart;
+			sourceTree = "<group>";
+		};
+		2B20A3682CC8E9DF001F39E9 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		2B20A3692CC8E9EF001F39E9 /* Cart Component */ = {
+			isa = PBXGroup;
+			children = (
+				2B20A36A2CC8EA3E001F39E9 /* DetailCart.swift */,
+			);
+			path = "Cart Component";
 			sourceTree = "<group>";
 		};
 		2B216B532CC7872A002AF809 /* UIComponent */ = {
 			isa = PBXGroup;
 			children = (
+				2B20A3692CC8E9EF001F39E9 /* Cart Component */,
 				2B216B542CC78779002AF809 /* TopSelfSection.swift */,
 			);
 			path = UIComponent;
@@ -182,6 +203,7 @@
 		2B92424F2CC2379F0031B39D /* UICommon */ = {
 			isa = PBXGroup;
 			children = (
+				2B20A3682CC8E9DF001F39E9 /* New Group */,
 				2B0B7A012CC633A8005091D4 /* DetailProduct */,
 				2B9242532CC238C10031B39D /* UIExtensions.swift */,
 				2B0B79FB2CC6292A005091D4 /* UITextFieldAndButton.swift */,
@@ -318,6 +340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B9242462CC237780031B39D /* Persistence.swift in Sources */,
+				2B20A3672CC8DF8F001F39E9 /* TestView.swift in Sources */,
 				2B216B552CC78779002AF809 /* TopSelfSection.swift in Sources */,
 				2B0B7A002CC632D6005091D4 /* ProductCellDataReusable.swift in Sources */,
 				2BEAEFC72CC7BF1400B13453 /* ProfileData.swift in Sources */,
@@ -332,6 +355,7 @@
 				2B20A3652CC8CA01001F39E9 /* CartViewModel.swift in Sources */,
 				2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */,
 				2B0B79FA2CC626F7005091D4 /* SignUpView.swift in Sources */,
+				2B20A36B2CC8EA3E001F39E9 /* DetailCart.swift in Sources */,
 				2B9242542CC238C10031B39D /* UIExtensions.swift in Sources */,
 				2B0B79FC2CC6292A005091D4 /* UITextFieldAndButton.swift in Sources */,
 				2B0B7A052CC63500005091D4 /* addedProductButton.swift in Sources */,

@@ -23,7 +23,7 @@ struct PopupView: View {
                 ForEach(options, id: \.self) { option in
                     Button(action: {
                         selectProduct(option)
-                        isPresented = false
+                        isPresented = false // Close the popup
                     }) {
                         HStack {
                             Text(option)
@@ -59,4 +59,3 @@ struct PopupView: View {
         }
     }
 }
-

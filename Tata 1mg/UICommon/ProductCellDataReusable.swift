@@ -87,7 +87,7 @@ struct ProductCellDataReusable: View {
                 Text("\(quantity) added")
                     .foregroundColor(.white)
                     .frame(width: 169, height: 40)
-                    .background(Color.green)
+                    .background(Color.orange)
                     .cornerRadius(10)
             } else {
                 Text("ADD")
