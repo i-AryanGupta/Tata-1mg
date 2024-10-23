@@ -32,7 +32,7 @@ struct ProductCellData: Identifiable {
 class ProductsFile {
     var productCellData: [ProductCellData] = [
         ProductCellData(productName: "Azithromycin",
-                        productImages: ["azit1", "azit2", "azit3"],
+                        productImages: ["azit1", "azit2"],
                         productPrice: 150.30,
                         productDiscountedPrice: 100.00,
                         productType: "Medicine",
@@ -63,7 +63,7 @@ class ProductsFile {
 
         
         ProductCellData(productName: "Vicks",
-                        productImages: ["viks1", "viks2", "viks3"],
+                        productImages: ["vivks1"],
                         productPrice: 122.70,
                         productDiscountedPrice: 99.00,
                         productType: "Medicine",
@@ -146,7 +146,7 @@ class ProductsFile {
 
         
         ProductCellData(productName: "Pill",
-                        productImages: ["pill"],
+                        productImages: ["pills2", "pills1", "pills3"],
                         productPrice: 150.30,
                         productDiscountedPrice: 125.30,
                         productType: "Medicine",

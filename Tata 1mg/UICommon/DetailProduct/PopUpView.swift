@@ -10,40 +10,35 @@ import SwiftUI
 struct PopupView: View {
     @Binding var addedProducts: Int
     @Binding var isPresented: Bool
-    @State var isSelected : Bool = false
+    @ObservedObject var cartViewModel: CartViewModel
+    var product: ProductCellData
     let options: [String]
 
     var body: some View {
-        ScrollView{
+        ScrollView {
             VStack(spacing: 20) {
                 Text("Select an Option")
                     .font(.headline)
-                
+
                 ForEach(options, id: \.self) { option in
                     Button(action: {
                         selectProduct(option)
-                        isPresented = false
-                        
+                        isPresented = false // Close the popup
                     }) {
-                        HStack{
+                        HStack {
                             Text(option)
-                                //.frame(maxWidth: .infinity)
                                 .padding()
-                               // .background(Color.blue)
-                               // .foregroundColor(.white)
-                                .cornerRadius(5)
-                            
                             Spacer()
-                            Image(systemName: addedProducts == Int(option) ? "checkmark.circle.fill":"plus.circle")
+                            Image(systemName: addedProducts == Int(option) ? "checkmark.circle.fill" : "plus.circle")
                                 .foregroundColor(addedProducts == Int(option) ? .orange : .black)
                         }
                         .background(addedProducts == Int(option) ? .orange.opacity(0.2) : .white)
-                       
                     }
                 }
-                
+
                 Button("Clear Products") {
-                    addedProducts = 0 // Clear the selected products
+                    addedProducts = 0 // Clear the quantity
+                    cartViewModel.updateQuantity(for: product, quantity: 0) // Remove the product from the cart
                     isPresented = false // Dismiss the popup
                 }
                 .padding()
@@ -55,8 +50,12 @@ struct PopupView: View {
         }
     }
 
-    private func selectProduct(_ product: String) {
-        addedProducts = Int(product) ?? 10
-        isSelected = true
+    private func selectProduct(_ option: String) {
+        addedProducts = Int(option) ?? 1 // Update the selected quantity
+
+        // Update the cart with the selected quantity
+        if addedProducts > 0 {
+            cartViewModel.updateQuantity(for: product, quantity: addedProducts)
+        }
     }
 }
