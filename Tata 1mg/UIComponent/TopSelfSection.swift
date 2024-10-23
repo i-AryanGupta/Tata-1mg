@@ -29,6 +29,7 @@ struct TopSelfSection: View {
                                 
                                 Image(images[index])
                                     .resizable()
+                                    .scaledToFit()
                                     .cornerRadius(15)
                             }
                                 .font(.headline)

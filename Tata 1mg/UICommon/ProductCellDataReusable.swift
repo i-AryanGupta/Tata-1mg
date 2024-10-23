@@ -8,22 +8,17 @@
 import SwiftUI
 
 struct ProductCellDataReusable: View {
-    var didAddCart: (() -> ())?
-    var image = "pills1"
-    var name = "Paracetamol"
-    var price = "190.00"
-    var delivery = "delivery by 11 pm"
-    @State var addedProducts = 0
-    @State var switchButton = false
-    @State var showPopup = false
-    let options = ["1", "2", "3"]
+    @ObservedObject var cartViewModel: CartViewModel
+    var product: ProductCellData
+    @State private var showPopup = false
+    @State private var quantity = 0
     
     var body: some View {
         ZStack {
             VStack(spacing: 0) {
-                Image(image)
+                Image(product.productImages.first ?? "defaultImage")
                     .resizable()
-                    .scaledToFill()
+                    .scaledToFit()
                     .frame(width: 140, height: 140)
                     .clipped()
                     .cornerRadius(15)
@@ -32,7 +27,6 @@ struct ProductCellDataReusable: View {
                 VStack(alignment: .leading, spacing: 4) {
                     productDetails
                     priceDetails
-                    
                     addButton()
                 }
                 .shadow(radius: 2)
@@ -52,7 +46,7 @@ struct ProductCellDataReusable: View {
     // Product details subview
     private var productDetails: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(name)
+            Text(product.productName)
                 .fontWeight(.bold)
                 .padding(.leading, 5)
             
@@ -61,7 +55,7 @@ struct ProductCellDataReusable: View {
                 .foregroundColor(.gray)
                 .padding(.leading, 5)
             
-            Text("Paracetamol")
+            Text(product.productInformation ?? "")
                 .font(.system(size: 14))
                 .foregroundColor(.gray)
                 .padding(.leading, 5)
@@ -71,12 +65,12 @@ struct ProductCellDataReusable: View {
     // Price details subview
     private var priceDetails: some View {
         HStack {
-            Text("\u{20B9} \(price)")
+            Text("\u{20B9} \(String(format: "%.2f", product.productDiscountedPrice))")
                 .fontWeight(.bold)
                 .font(.subheadline)
                 .padding(.leading, 5)
             
-            Text("30% off")
+            Text("\(Int((product.productPrice - product.productDiscountedPrice) / product.productPrice * 100))% off")
                 .foregroundColor(.green)
                 .fontWeight(.bold)
                 .font(.subheadline)
@@ -87,29 +81,23 @@ struct ProductCellDataReusable: View {
     // Add to cart button
     private func addButton() -> some View {
         Button(action: {
-            didAddCart?()
-            addedProducts += 1
-            if addedProducts > 0 {
-                withAnimation(.easeIn(duration: 2)) {
-                    switchButton = true
-                }
-            }
+            showPopup = true
         }, label: {
-            if addedProducts > 0 {
-                addedProductButton(title: "\(addedProducts) added") {
-                    showPopup = true
-                }
-                .frame(width: 169, height: 40)
+            if quantity > 0 {
+                Text("\(quantity) added")
+                    .foregroundColor(.white)
+                    .frame(width: 169, height: 40)
+                    .background(Color.green)
+                    .cornerRadius(10)
             } else {
-                Text("Add")
+                Text("ADD")
                     .foregroundColor(Color.btnCellText)
                     .bold()
                     .frame(width: 169, height: 40)
+                    .background(Color.btnBGCell)
+                    .cornerRadius(10)
             }
         })
-        .background(Color.btnBGCell)
-        .cornerRadius(10)
-        .shadow(color: .gray, radius: 3, x: 0, y: 5)
         .padding(5)
     }
     
@@ -119,7 +107,7 @@ struct ProductCellDataReusable: View {
             Color.black.opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
             
-            PopupView(addedProducts: $addedProducts, isPresented: $showPopup, options: options)
+            PopupView(addedProducts: $quantity, isPresented: $showPopup, cartViewModel: cartViewModel, product: product, options: ["1", "2", "3"])
                 .frame(width: 300, height: 350)
                 .background(Color.white)
                 .cornerRadius(10)
@@ -128,8 +116,30 @@ struct ProductCellDataReusable: View {
     }
 }
 
+
+
 struct ProductCellDataReusable_Previews: PreviewProvider {
     static var previews: some View {
-        ProductCellDataReusable()
+        // Create a mock product
+        let sampleProduct = ProductCellData(
+            productName: "Paracetamol",
+            productImages: ["pills1"],
+            productPrice: 150.00,
+            productDiscountedPrice: 125.00,
+            productType: "Medicine",
+            productInformation: "Effective pain relief for headaches and muscle pain."
+        )
+        
+        // Create a mock CartViewModel
+        let mockCartViewModel = CartViewModel()
+        
+        // Return the preview of the reusable cell with sample data
+        ProductCellDataReusable(
+            cartViewModel: mockCartViewModel,
+            product: sampleProduct
+        )
+        .previewLayout(.sizeThatFits) // Ensures the preview fits the content
+        .padding()
     }
 }
+
