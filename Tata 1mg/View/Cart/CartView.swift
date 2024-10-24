@@ -10,6 +10,7 @@ import SwiftUI
 
 struct CartView: View {
     @ObservedObject var cartViewModel: CartViewModel
+    let productsFile = ProductsFile()
     
     var body: some View {
         VStack {
@@ -64,94 +65,52 @@ struct CartView: View {
                 .background(Color.white)
                 
                 DetailCart()
+                // Additional Product Sections (below DetailCart)
+                VStack(alignment: .leading) {
+                    // Wellness Products Section
+                    Text("Last Minute Buy")
+                        .font(.headline)
+                        .padding(.leading, 5)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            productStack(for: "Wellness")
+                        }
+                        .padding(.leading, 5)
+                    }
+
+                    // Medicine Products Section
+                    Text("Medicine Products")
+                        .font(.headline)
+                        .padding(.leading, 5)
+                    
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            productStack(for: "Medicine")
+                        }
+                        .padding(.leading, 5)
+                    }
+                }
+                .padding(.horizontal)
+                
+                BillSummaryView(totalPrice: cartViewModel.totalPrice, totalSavings: cartViewModel.totalSavings)
+                
+                BottomImage()
+                            
             }
+            CartBottomBarView(totalPrice: cartViewModel.totalPrice)
+            .padding(.top, 10)
         }
         .padding(.horizontal)
     }
-}
-
-struct CartItemView: View {
-    var item: CartItem
-    @ObservedObject var cartViewModel: CartViewModel
     
-    var body: some View {
-        VStack {
-            HStack {
-                // Product Image
-                Image(item.product.productImages.first ?? "defaultImage")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(8)
-                
-                // Product Info
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(item.product.productName)
-                        .font(.headline)
-                    
-                    Text("Strip of 5 tablets") // Dynamic product description if necessary
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    HStack(spacing: 10) {
-                        // Price VStack (stacked prices)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("₹\(String(format: "%.0f", item.product.productDiscountedPrice))")
-                                .font(.headline)
-                            
-                            Text("₹\(String(format: "%.2f", item.product.productPrice))")
-                                .font(.subheadline)
-                                .strikethrough()
-                                .foregroundColor(.gray)
-                                .font(.caption)
-                        }
-                        
-                        // Percentage off to the right
-                        Text("\(Int((item.product.productPrice - item.product.productDiscountedPrice) / item.product.productPrice * 100))% off")
-                            .font(.subheadline)
-                            .foregroundColor(.green)
-                    }
-                    
-                    // Remove Button (Optional if needed, can comment out)
-                    Button(action: {
-                        cartViewModel.updateQuantity(for: item.product, quantity: 0)
-                    }) {
-                        Text("Remove")
-                            .font(.caption)
-                            .foregroundColor(.blue)
-                    }
-                }
-                Spacer()
-
-                // Stepper for quantity
-                HStack(spacing: 10) {
-                    Button(action: {
-                        if item.quantity > 1 {
-                            cartViewModel.updateQuantity(for: item.product, quantity: item.quantity - 1)
-                        }
-                    }) {
-                        Image(systemName: "minus")
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(15)
-                    }
-
-                    Text("\(item.quantity)")
-                        .font(.body)
-                        .frame(width: 30, height: 30)
-
-                    Button(action: {
-                        cartViewModel.updateQuantity(for: item.product, quantity: item.quantity + 1)
-                    }) {
-                        Image(systemName: "plus")
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(15)
-                    }
-                }
-            }
-            Divider().padding(.vertical, 8)
+    // Function to filter and display products by type, similar to HomePageView
+    func productStack(for type: String) -> some View {
+        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
+        
+        return ForEach(filteredProducts) { product in
+            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
         }
-        .padding(.vertical)
     }
 }
 
