@@ -26,6 +26,7 @@
 		2B45BB932CCA1F680066E028 /* BottomImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45BB922CCA1F680066E028 /* BottomImage.swift */; };
 		2B45BB952CCA22E30066E028 /* CartBottomBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45BB942CCA22E20066E028 /* CartBottomBarView.swift */; };
 		2B45BB982CCA35010066E028 /* ProductPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45BB972CCA35010066E028 /* ProductPageView.swift */; };
+		2B45BB9A2CCA3FAB0066E028 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B45BB992CCA3FAB0066E028 /* ProductViewModel.swift */; };
 		2B73C52A2CC8BB230018133D /* HomeTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B73C5292CC8BB230018133D /* HomeTabView.swift */; };
 		2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423C2CC237770031B39D /* Tata_1mgApp.swift */; };
 		2B92423F2CC237770031B39D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B92423E2CC237770031B39D /* ContentView.swift */; };
@@ -67,6 +68,7 @@
 		2B45BB922CCA1F680066E028 /* BottomImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomImage.swift; sourceTree = "<group>"; };
 		2B45BB942CCA22E20066E028 /* CartBottomBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartBottomBarView.swift; sourceTree = "<group>"; };
 		2B45BB972CCA35010066E028 /* ProductPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPageView.swift; sourceTree = "<group>"; };
+		2B45BB992CCA3FAB0066E028 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		2B73C5292CC8BB230018133D /* HomeTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabView.swift; sourceTree = "<group>"; };
 		2B9242392CC237770031B39D /* Tata 1mg.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tata 1mg.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B92423C2CC237770031B39D /* Tata_1mgApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tata_1mgApp.swift; sourceTree = "<group>"; };
@@ -223,7 +225,6 @@
 			isa = PBXGroup;
 			children = (
 				2B20A3682CC8E9DF001F39E9 /* New Group */,
-				2B0B7A012CC633A8005091D4 /* DetailProduct */,
 				2B9242532CC238C10031B39D /* UIExtensions.swift */,
 				2B0B79FB2CC6292A005091D4 /* UITextFieldAndButton.swift */,
 				2B0B79FD2CC62C82005091D4 /* KeyboardResponsiveModifier.swift */,
@@ -236,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				2BE3320A2CC272D10047BFB7 /* Product.swift */,
+				2B0B7A012CC633A8005091D4 /* DetailProduct */,
 				2B20A3622CC8C9E6001F39E9 /* CartItem.swift */,
 			);
 			path = Model;
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				2B20A3642CC8CA01001F39E9 /* CartViewModel.swift */,
+				2B45BB992CCA3FAB0066E028 /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				2B45BB8F2CCA1A4C0066E028 /* CartItemView.swift in Sources */,
 				2B9242672CC265E60031B39D /* LogInView.swift in Sources */,
 				2B45BB952CCA22E30066E028 /* CartBottomBarView.swift in Sources */,
+				2B45BB9A2CCA3FAB0066E028 /* ProductViewModel.swift in Sources */,
 				2B45BB932CCA1F680066E028 /* BottomImage.swift in Sources */,
 				2B20A35F2CC8C534001F39E9 /* CartView.swift in Sources */,
 				2B0B7A072CC65409005091D4 /* SearchBarProductView.swift in Sources */,

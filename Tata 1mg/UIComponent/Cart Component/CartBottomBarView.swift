@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct CartBottomBarView: View {
+    @State private var showHealthplan = false
     var totalPrice: Double
 
     var body: some View {
@@ -52,7 +53,7 @@ struct CartBottomBarView: View {
 
                 // Order Now Button (Styled similarly to "Continue")
                 Button(action: {
-                    // Handle Order Now action
+                    showHealthplan = true
                 }) {
                     Text("Order Now")
                         .font(.headline)
@@ -67,6 +68,7 @@ struct CartBottomBarView: View {
         .padding(.horizontal, 5) // Padding on both sides
         .padding(.vertical, 10)  // Padding vertically for spacing
         .background(Color.white)
+        .bgNavLink(content: HealthPlansView(), isAction: $showHealthplan)
     }
 }
 
