@@ -157,4 +157,3 @@ struct CartView_Previews: PreviewProvider {
             .padding()
     }
 }
-

@@ -148,4 +148,3 @@ struct ProductCellDataReusable_Previews: PreviewProvider {
         
     }
 }
-
