@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ProductCellDataReusable: View {
-    @ObservedObject var cartViewModel: CartViewModel
+    @ObservedObject var cartViewModel: CartViewModel // Directly pass CartViewModel
     var product: ProductCellData
     @State private var showPopup = false
+    @State private var showProductPage = false
     @State private var quantity = 0
     
     var body: some View {
@@ -36,6 +37,13 @@ struct ProductCellDataReusable: View {
                 RoundedRectangle(cornerRadius: 15)
                     .stroke(Color.gray.opacity(0.8))
             )
+            .onTapGesture {
+                showProductPage = true
+            }
+            .bgNavLink(
+                content: ProductPageView(cartViewModel: cartViewModel, productViewModel: ProductViewModel(product: product)),
+                isAction: $showProductPage
+            )
             
             if showPopup {
                 popupOverlay
@@ -43,7 +51,6 @@ struct ProductCellDataReusable: View {
         }
     }
     
-    // Product details subview
     private var productDetails: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text(product.productName)
@@ -62,7 +69,6 @@ struct ProductCellDataReusable: View {
         }
     }
     
-    // Price details subview
     private var priceDetails: some View {
         HStack {
             Text("\u{20B9} \(String(format: "%.2f", product.productDiscountedPrice))")
@@ -78,7 +84,6 @@ struct ProductCellDataReusable: View {
         }
     }
     
-    // Add to cart button
     private func addButton() -> some View {
         Button(action: {
             showPopup = true
@@ -101,7 +106,6 @@ struct ProductCellDataReusable: View {
         .padding(5)
     }
     
-    // Popup overlay for quantity selection
     private var popupOverlay: some View {
         ZStack {
             Color.black.opacity(0.4)
@@ -115,6 +119,7 @@ struct ProductCellDataReusable: View {
         }
     }
 }
+
 
 
 
@@ -132,7 +137,7 @@ struct ProductCellDataReusable_Previews: PreviewProvider {
         
         // Create a mock CartViewModel
         let mockCartViewModel = CartViewModel()
-        
+
         // Return the preview of the reusable cell with sample data
         ProductCellDataReusable(
             cartViewModel: mockCartViewModel,
@@ -140,6 +145,7 @@ struct ProductCellDataReusable_Previews: PreviewProvider {
         )
         .previewLayout(.sizeThatFits) // Ensures the preview fits the content
         .padding()
+        
     }
 }
 

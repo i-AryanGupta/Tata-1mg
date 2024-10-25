@@ -9,9 +9,9 @@
 import SwiftUI
 
 struct CartView: View {
-    @ObservedObject var cartViewModel: CartViewModel
+   @ObservedObject var cartViewModel: CartViewModel
     let productsFile = ProductsFile()
-    
+
     var body: some View {
         VStack {
             // Savings Section
@@ -40,16 +40,17 @@ struct CartView: View {
                 Spacer()
             }
             .padding(.horizontal)
-            //.Divider().padding(.vertical, 8)
-            
-            ScrollView{
-                
+
+            ScrollView {
                 // Cart Items List
                 VStack {
                     ForEach(cartViewModel.cartItems) { item in
                         CartItemView(item: item, cartViewModel: cartViewModel)
+                            .id(item.id) // Ensure SwiftUI tracks items individually and prevents re-rendering issues
                     }
                 }
+
+                // Apply Coupon Section
                 Button(action: {
                     // Apply coupon action
                 }) {
@@ -63,15 +64,15 @@ struct CartView: View {
                     .foregroundColor(.green)
                 }
                 .background(Color.white)
-                
+
+                // DetailCart and Additional Products
                 DetailCart()
-                // Additional Product Sections (below DetailCart)
+
                 VStack(alignment: .leading) {
-                    // Wellness Products Section
                     Text("Last Minute Buy")
                         .font(.headline)
                         .padding(.leading, 5)
-                    
+
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             productStack(for: "Wellness")
@@ -79,11 +80,10 @@ struct CartView: View {
                         .padding(.leading, 5)
                     }
 
-                    // Medicine Products Section
                     Text("Medicine Products")
                         .font(.headline)
                         .padding(.leading, 5)
-                    
+
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 10) {
                             productStack(for: "Medicine")
@@ -92,27 +92,36 @@ struct CartView: View {
                     }
                 }
                 .padding(.horizontal)
-                
+
+                // Bill Summary
                 BillSummaryView(totalPrice: cartViewModel.totalPrice, totalSavings: cartViewModel.totalSavings)
-                
-                BottomImage()
-                            
+
+                BottomImage() // Display an additional image if needed
             }
+
+            // Cart Bottom Bar View (fixed at the bottom)
             CartBottomBarView(totalPrice: cartViewModel.totalPrice)
-            .padding(.top, 10)
+                .padding(.top, 10)
         }
         .padding(.horizontal)
+        .onAppear {
+            // Reset navigation flags when the cart appears
+        }
+        .onDisappear {
+            // Ensure navigation state is not unintentionally affected after cart updates
+        }
     }
-    
+
     // Function to filter and display products by type, similar to HomePageView
     func productStack(for type: String) -> some View {
         let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
-        
         return ForEach(filteredProducts) { product in
             ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
+                .id(product.id) // Ensure that SwiftUI tracks individual products properly
         }
     }
 }
+
 
 
 struct CartView_Previews: PreviewProvider {
@@ -137,7 +146,7 @@ struct CartView_Previews: PreviewProvider {
             productType: "Medicine",
             productInformation: "Paracetamol is used for pain relief and fever reduction."
         )
-        
+
         // Add these products as cart items
         sampleCartViewModel.addToCart(product: sampleProduct1)
         sampleCartViewModel.addToCart(product: sampleProduct2)
