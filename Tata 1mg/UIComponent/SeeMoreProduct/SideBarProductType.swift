@@ -17,15 +17,24 @@ struct SideBarProductType: View {
                 Button(action: {
                     selectedCategory = category
                 }) {
-                    HStack {
+                        VStack() {
+                            Image("vivks1")
+                                .resizable()
+                                .scaledToFit()
+                                .padding(3)
+                                .cornerRadius(15)
+                        
+                        //.background(Color.orange.opacity(0.3))
+                        
                         Text(category)
-                            .font(.headline)
+                                .font(.headline)
+                                .font(.system(size: 5))
                             .foregroundColor(selectedCategory == category ? .blue : .black)
                         
                         Spacer()
                     }
-                    .padding()
-                    .background(selectedCategory == category ? Color.blue.opacity(0.2) : Color.clear)
+                        .frame(width: 80, height: 120)
+                    .background(selectedCategory == category ? Color.orange.opacity(0.4) : Color.clear)
                     .cornerRadius(10)
                 }
             }
@@ -37,11 +46,13 @@ struct SideBarProductType: View {
 }
 
 
+
 struct SideBarProductType_Previews: PreviewProvider {
     static var previews: some View {
-        SideBarProductType(categories: ["Nasal Drops & Sprays", "Chest Rubs & Balms", "Cough Syrups"], selectedCategory: .constant("Nasal Drops & Sprays"))
+        SideBarProductType(categories: ["Medicine", "Wellness"], selectedCategory: .constant("Medicine"))
             .previewLayout(.sizeThatFits)
             .padding()
     }
 }
+
 

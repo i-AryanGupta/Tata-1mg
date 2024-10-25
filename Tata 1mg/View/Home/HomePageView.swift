@@ -117,7 +117,7 @@ struct HomePageView: View {
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                             ForEach(healthEssentials, id: \.name) { item in
-                                NavigationLink(destination: CategoryDetailView()) {
+                                NavigationLink(destination: CategoryDetailView(cartViewModel: cartViewModel)) {
                                     SpecificProductCell(data: item.name, image: item.image)
                                 }
                             }
