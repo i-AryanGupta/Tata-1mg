@@ -7,12 +7,12 @@
 
 import SwiftUI
 
-import SwiftUI
 
 struct ProductPageView: View {
     @ObservedObject var cartViewModel: CartViewModel // Directly pass CartViewModel
     @ObservedObject var productViewModel: ProductViewModel
     @State private var showCart = false
+    let productsFile = ProductsFile()
 
     var body: some View {
         VStack {
@@ -26,6 +26,10 @@ struct ProductPageView: View {
                                     .scaledToFit()
                                     .frame(width: 200, height: 200)
                                     .cornerRadius(10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 10)
+                                            .stroke(Color.gray.opacity(0.2), lineWidth: 1) // Change the color and line width as needed
+                                    )
                             }
                         }
                         .padding(.horizontal)
@@ -68,6 +72,11 @@ struct ProductPageView: View {
                         }
                     }
                     .padding(.horizontal)
+                    
+                    DetailCart()
+                        .padding(.leading, 10)
+                        .padding(.trailing, 10)
+                        
 
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Product Description")
@@ -78,12 +87,47 @@ struct ProductPageView: View {
                             .foregroundColor(.gray)
                     }
                     .padding(.horizontal)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Last Minute Buy")
+                            .font(.headline)
+                            .padding(.leading, 5)
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                productStack(for: "Wellness")
+                            }
+                            .padding(.leading, 5)
+                        }
+
+                        Text("Medicine Products")
+                            .font(.headline)
+                            .padding(.leading, 5)
+
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                productStack(for: "Medicine")
+                            }
+                            .padding(.leading, 5)
+                        }
+                    }
+                    .padding(.horizontal)
+                    
+                    BottomImage()
                 }
                 .padding(.top)
             }
         }
         .navigationBarItems(trailing: cartButton)
         .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
+    }
+    
+    func productStack(for type: String) -> some View {
+        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
+        return ForEach(filteredProducts) { product in
+            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
+                .id(product.id) // Ensure that SwiftUI tracks individual products properly
+        }
     }
 
     private var cartButton: some View {
@@ -136,4 +180,3 @@ struct ProductPageView_Previews: PreviewProvider {
                     
             }
 }
-

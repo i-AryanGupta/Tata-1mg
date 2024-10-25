@@ -14,16 +14,28 @@ struct HomePageView: View {
     @State private var showLocation = false
     let productsFile = ProductsFile()
     
+    // Sample data for health essentials
+        let healthEssentials = [
+            (name: "Stomach Care", image: "azit2"),
+            (name: "Cold & Cough", image: "vivks1"),
+            (name: "Pain Relief", image: "iodex1"),
+            (name: "First Aid", image: "paracetamol"),
+            (name: "Diabetes", image: "pills1"),
+            (name: "Eye & Ear Care", image: "azit1")
+        ]
+
+    
     var body: some View {
-        NavigationView {
-            ScrollView {
-                VStack(spacing: 30) {
+        NavigationView { // NavigationView Start
+            ScrollView { // ScrollView Start
+                VStack(spacing: 30) { // VStack Start
+                    
                     // Top bar with Location and Cart buttons
-                    HStack {
+                    HStack { // HStack for Top Bar Start
                         Button(action: {
                             showLocation = true
                         }) {
-                            HStack {
+                            HStack { // HStack for Location Button Start
                                 Image(systemName: "location.fill")
                                     .font(.title3)
                                     .foregroundColor(Color.white)
@@ -34,7 +46,7 @@ struct HomePageView: View {
                                 Text("Bangalore")
                                     .font(.headline)
                                     .foregroundColor(Color.primaryText)
-                            }
+                            } // HStack for Location Button End
                         }
                         
                         Spacer()
@@ -42,7 +54,7 @@ struct HomePageView: View {
                         Button(action: {
                             showCart = true
                         }) {
-                            HStack {
+                            HStack { // HStack for Cart Button Start
                                 Image(systemName: "cart.fill")
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.white)
@@ -60,68 +72,119 @@ struct HomePageView: View {
                                         .clipShape(Circle())
                                         .offset(x: -10, y: -10)
                                 }
-                            }
+                            } // HStack for Cart Button End
                         }
-                    }
+                    } // HStack for Top Bar End
                     .padding(.leading, 20)
                     .padding(.trailing, 20)
                     
-                    // Search bar
-                    SearchBarProductView()
-                        .padding(.leading, 10)
-                        .padding(.trailing, 10)
+                    VStack(spacing: 15){
+                        SearchBarProductView()
+                            .padding(.leading, 10)
+                            .padding(.trailing, 10)
+                        
+                        // Top section (could be promotions, categories, etc.)
+                        TopSelfSection()
+                            .padding(.leading, 20)
+                            .padding(.trailing, 20)
+                            .padding(.top, 10)
+                        
+                        CustomImageScroll(imageNames: ["hair_poster", "med_poster", "fever_poster", "equip_poster"])
+                        
+                        // Wellness and Medicine product sections
+                        VStack(alignment: .leading) { // VStack for Wellness Products Start
+                            Text("Wellness Products")
+                                .font(.headline)
+                                .padding(.leading, 20)
+                            
+                            ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Wellness Products Start
+                                HStack(spacing: 20) { // HStack for Wellness Product Stack Start
+                                    productStack(for: "Wellness")
+                                } // HStack for Wellness Product Stack End
+                                .padding(.horizontal)
+                            } // ScrollView for Wellness Products End
+                        } // VStack for Wellness Products End
+                        .padding(.horizontal)
+                        
+                        //personal care
+                    }
                     
-                    // Top section (could be promotions, categories, etc.)
-                    TopSelfSection()
-                        .padding(.leading, 20)
-                        .padding(.trailing, 20)
-                    
-                    // Wellness and Medicine product sections
+                    // Health Essentials Grid
                     VStack(alignment: .leading) {
-                        // Wellness Products
-                        Text("Wellness Products")
+                        Text("Health essentials")
                             .font(.headline)
                             .padding(.leading, 20)
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
-                                productStack(for: "Wellness")
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
+                            ForEach(healthEssentials, id: \.name) { item in
+                                NavigationLink(destination: CategoryDetailView()) {
+                                    SpecificProductCell(data: item.name, image: item.image)
+                                }
                             }
-                            .padding(.horizontal)
                         }
-                        
-                        // Medicine Products
+                        .padding(.horizontal, 20)
+                    }
+                    
+                                    
+                    VStack(alignment: .leading) { // VStack for Medicine Products Start
                         Text("Medicine Products")
                             .font(.headline)
                             .padding(.leading, 20)
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
+                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Medicine Products Start
+                            HStack(spacing: 20) { // HStack for Medicine Product Stack Start
                                 productStack(for: "Medicine")
-                            }
+                            } // HStack for Medicine Product Stack End
                             .padding(.horizontal)
-                        }
-                        
+                        } // ScrollView for Medicine Products End
+                    //} // VStack for Medicine Products End
+                    //.padding(.horizontal)
+                    
+                    //VStack(alignment: .leading) { // VStack for Last Minute Buy Start
                         Text("Last minute buy")
                             .font(.headline)
                             .padding(.leading, 20)
                         
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 20) {
+                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Last Minute Buy Start
+                            HStack(spacing: 20) { // HStack for Last Minute Buy Stack Start
                                 productStack(for: "Medicine")
-                            }
+                            } // HStack for Last Minute Buy Stack End
                             .padding(.horizontal)
-                        }
-                    }
+                        } // ScrollView for Last Minute Buy End
+                    } // VStack for Last Minute Buy End
                     .padding(.horizontal)
                     
-                } // VStack
-            } // ScrollView
-        } // NavigationView
+                    CustomAdView(imageName: "tata_ad")
+                    
+                    VStack(alignment: .leading) { // VStack for SkinCare Products Start
+                        Text("SkinCare Products")
+                            .font(.headline)
+                            .padding(.leading, 20)
+                        
+                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for SkinCare Products Start
+                            HStack(spacing: 20) { // HStack for SkinCare Product Stack Start
+                                productStack(for: "Wellness")
+                            } // HStack for SkinCare Product Stack End
+                            .padding(.horizontal)
+                        } // ScrollView for SkinCare Products End
+                    } // VStack for SkinCare Products End
+                    .padding(.horizontal)
+                    
+                   CustomAdView(imageName: "wellwomen_ad")
+                    
+                    // Uncomment if BottomImage is needed
+                    VStack(alignment: .leading) {
+                        BottomImage()
+                    }
+                    
+                    
+                } // Main VStack End
+            } // ScrollView End
+        } // NavigationView End
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
-        // Replace .sheet with your custom .bgNavLink for CartView and LocationView
         .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
+        // Add .bgNavLink for LocationView if needed
         //.bgNavLink(content: LocationView(), isAction: $showLocation)
     }
     
@@ -133,7 +196,7 @@ struct HomePageView: View {
             ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
         }
     }
-}
+} // HomePageView End
 
 
 

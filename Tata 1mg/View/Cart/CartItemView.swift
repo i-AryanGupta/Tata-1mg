@@ -94,4 +94,3 @@ struct CartItemView: View {
         .id(item.id) // Give each item a unique identity to prevent full list refreshes
     }
 }
-
