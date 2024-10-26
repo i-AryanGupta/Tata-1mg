@@ -16,7 +16,7 @@ struct TopSelfSection: View {
             HStack{
                 
                     RoundedRectangle(cornerRadius: 15)
-                    .foregroundStyle(LinearGradient(gradient: Gradient(colors: [Color.red, Color.pink]), startPoint: .topTrailing, endPoint: .bottomLeading))
+                    .foregroundStyle(LinearGradient(colors: [Color.red, Color.purple], startPoint: .leading, endPoint: .trailing))
                         .overlay(
                             HStack{
                                 VStack(alignment:.leading){

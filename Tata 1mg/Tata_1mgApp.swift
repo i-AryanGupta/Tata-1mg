@@ -11,15 +11,20 @@ import SwiftUI
 struct Tata_1mgApp: App {
     let persistenceController = PersistenceController.shared
 
-    var body: some Scene {
-        WindowGroup {
-            NavigationView{
-                OnboardingScreen()
-            }
-            .navigationViewStyle(.stack)
+       var body: some Scene {
+           WindowGroup {
+               NavigationView {
+                   
+//                   HomeTabView() // Root View
+                   OnboardingScreen()
+                   //            ContentView()
+                   //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+
+               }
+               .navigationViewStyle(.stack)
             
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }
+
+

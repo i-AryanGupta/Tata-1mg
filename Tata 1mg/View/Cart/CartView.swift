@@ -9,8 +9,9 @@
 import SwiftUI
 
 struct CartView: View {
-    @ObservedObject var cartViewModel: CartViewModel
-    
+   @ObservedObject var cartViewModel: CartViewModel
+    let productsFile = ProductsFile()
+
     var body: some View {
         VStack {
             // Savings Section
@@ -39,16 +40,17 @@ struct CartView: View {
                 Spacer()
             }
             .padding(.horizontal)
-            //.Divider().padding(.vertical, 8)
-            
-            ScrollView{
-                
+
+            ScrollView {
                 // Cart Items List
                 VStack {
                     ForEach(cartViewModel.cartItems) { item in
                         CartItemView(item: item, cartViewModel: cartViewModel)
+                            .id(item.id) // Ensure SwiftUI tracks items individually and prevents re-rendering issues
                     }
                 }
+
+                // Apply Coupon Section
                 Button(action: {
                     // Apply coupon action
                 }) {
@@ -62,98 +64,64 @@ struct CartView: View {
                     .foregroundColor(.green)
                 }
                 .background(Color.white)
-                
+
+                // DetailCart and Additional Products
                 DetailCart()
+
+                VStack(alignment: .leading) {
+                    Text("Last Minute Buy")
+                        .font(.headline)
+                        .padding(.leading, 5)
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            productStack(for: "Wellness")
+                        }
+                        .padding(.leading, 5)
+                    }
+
+                    Text("Medicine Products")
+                        .font(.headline)
+                        .padding(.leading, 5)
+
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 10) {
+                            productStack(for: "Medicine")
+                        }
+                        .padding(.leading, 5)
+                    }
+                }
+                .padding(.horizontal)
+
+                // Bill Summary
+                BillSummaryView(totalPrice: cartViewModel.totalPrice, totalSavings: cartViewModel.totalSavings)
+
+                BottomImage() // Display an additional image if needed
             }
+
+            // Cart Bottom Bar View (fixed at the bottom)
+            CartBottomBarView(cartViewModel: cartViewModel, totalPrice: cartViewModel.totalPrice)
+                .padding(.top, 10)
         }
         .padding(.horizontal)
-    }
-}
-
-struct CartItemView: View {
-    var item: CartItem
-    @ObservedObject var cartViewModel: CartViewModel
-    
-    var body: some View {
-        VStack {
-            HStack {
-                // Product Image
-                Image(item.product.productImages.first ?? "defaultImage")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .cornerRadius(8)
-                
-                // Product Info
-                VStack(alignment: .leading, spacing: 5) {
-                    Text(item.product.productName)
-                        .font(.headline)
-                    
-                    Text("Strip of 5 tablets") // Dynamic product description if necessary
-                        .font(.caption)
-                        .foregroundColor(.gray)
-                    
-                    HStack(spacing: 10) {
-                        // Price VStack (stacked prices)
-                        VStack(alignment: .leading, spacing: 0) {
-                            Text("₹\(String(format: "%.0f", item.product.productDiscountedPrice))")
-                                .font(.headline)
-                            
-                            Text("₹\(String(format: "%.2f", item.product.productPrice))")
-                                .font(.subheadline)
-                                .strikethrough()
-                                .foregroundColor(.gray)
-                                .font(.caption)
-                        }
-                        
-                        // Percentage off to the right
-                        Text("\(Int((item.product.productPrice - item.product.productDiscountedPrice) / item.product.productPrice * 100))% off")
-                            .font(.subheadline)
-                            .foregroundColor(.green)
-                    }
-                    
-                    // Remove Button (Optional if needed, can comment out)
-                    Button(action: {
-                        cartViewModel.updateQuantity(for: item.product, quantity: 0)
-                    }) {
-                        Text("Remove")
-                            .font(.caption)
-                            .foregroundColor(.blue)
-                    }
-                }
-                Spacer()
-
-                // Stepper for quantity
-                HStack(spacing: 10) {
-                    Button(action: {
-                        if item.quantity > 1 {
-                            cartViewModel.updateQuantity(for: item.product, quantity: item.quantity - 1)
-                        }
-                    }) {
-                        Image(systemName: "minus")
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(15)
-                    }
-
-                    Text("\(item.quantity)")
-                        .font(.body)
-                        .frame(width: 30, height: 30)
-
-                    Button(action: {
-                        cartViewModel.updateQuantity(for: item.product, quantity: item.quantity + 1)
-                    }) {
-                        Image(systemName: "plus")
-                            .frame(width: 30, height: 30)
-                            .background(Color.gray.opacity(0.2))
-                            .cornerRadius(15)
-                    }
-                }
-            }
-            Divider().padding(.vertical, 8)
+        .onAppear {
+            // Reset navigation flags when the cart appears
         }
-        .padding(.vertical)
+        .onDisappear {
+            // Ensure navigation state is not unintentionally affected after cart updates
+        }
+    }
+
+    // Function to filter and display products by type, similar to HomePageView
+    func productStack(for type: String) -> some View {
+        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
+        return ForEach(filteredProducts) { product in
+            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
+                .id(product.id) // Ensure that SwiftUI tracks individual products properly
+        }
     }
 }
+
 
 
 struct CartView_Previews: PreviewProvider {
@@ -178,7 +146,7 @@ struct CartView_Previews: PreviewProvider {
             productType: "Medicine",
             productInformation: "Paracetamol is used for pain relief and fever reduction."
         )
-        
+
         // Add these products as cart items
         sampleCartViewModel.addToCart(product: sampleProduct1)
         sampleCartViewModel.addToCart(product: sampleProduct2)
@@ -189,4 +157,3 @@ struct CartView_Previews: PreviewProvider {
             .padding()
     }
 }
-
