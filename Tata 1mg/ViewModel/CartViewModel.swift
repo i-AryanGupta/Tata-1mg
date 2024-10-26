@@ -35,7 +35,18 @@ class CartViewModel: ObservableObject {
     var totalPrice: Double {
         cartItems.reduce(0) { $0 + ($1.product.productDiscountedPrice * Double($1.quantity)) }
     }
+    
+    /// Returns a snapshot of the current cart items without clearing the cart
+    func getCartSnapshot() -> [CartItem] {
+        return cartItems
+    }
+    
+    /// Clears the cart items
+    func clearCart() {
+        cartItems.removeAll()
+    }
 }
+
 
 
 

@@ -97,9 +97,9 @@ struct ProfileView: View {
             
         }
         .bgNavLink(content: LogInView(), isAction: $showSignIn)
-       
-}
-
+        
+    }
+    
 }
 
 struct ProfileView_Previews: PreviewProvider {

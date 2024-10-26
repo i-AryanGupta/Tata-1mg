@@ -20,20 +20,20 @@ struct BillSummaryView: View {
             HStack {
                 Text("Item total (MRP)")
                 Spacer()
-                Text("₹\(String(format: "%.2f", totalPrice))")
+                Text("₹\(String(format: "%.2f", totalPrice+totalSavings))")
             }
 
             HStack {
                 Text("Green packaging charge")
                 Spacer()
-                Text("₹4")
+                Text("₹0")
             }
 
             HStack {
                 Text("Neucoins used")
                     .foregroundColor(.green)
                 Spacer()
-                Text("-₹1")
+                Text("-₹0")
             }
 
             HStack {
@@ -57,7 +57,7 @@ struct BillSummaryView: View {
                     .font(.title3)
                     .fontWeight(.bold)
                 Spacer()
-                Text("₹\(String(format: "%.2f", totalPrice - totalSavings - 1 + 4))") // Subtract Neucoins, add Green packaging
+                Text("₹\(String(format: "%.2f", totalPrice))") // Subtract Neucoins, add Green packaging
                     .font(.title3)
                     .fontWeight(.bold)
             }

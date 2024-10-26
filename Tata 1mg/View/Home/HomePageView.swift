@@ -12,6 +12,7 @@ struct HomePageView: View {
     @StateObject private var cartViewModel = CartViewModel()
     @State private var showCart = false
     @State private var showLocation = false
+    @State private var selectedCity: String = "Bangalore"
     let productsFile = ProductsFile()
     
     // Sample data for health essentials
@@ -43,7 +44,7 @@ struct HomePageView: View {
                                     .background(Color.btnBG)
                                     .cornerRadius(22)
                                 
-                                Text("Bangalore")
+                                Text(selectedCity)
                                     .font(.headline)
                                     .foregroundColor(Color.primaryText)
                             } // HStack for Location Button End
@@ -125,7 +126,7 @@ struct HomePageView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                                    
+                    
                     VStack(alignment: .leading) { // VStack for Medicine Products Start
                         Text("Medicine Products")
                             .font(.headline)
@@ -137,10 +138,10 @@ struct HomePageView: View {
                             } // HStack for Medicine Product Stack End
                             .padding(.horizontal)
                         } // ScrollView for Medicine Products End
-                    //} // VStack for Medicine Products End
-                    //.padding(.horizontal)
-                    
-                    //VStack(alignment: .leading) { // VStack for Last Minute Buy Start
+                        //} // VStack for Medicine Products End
+                        //.padding(.horizontal)
+                        
+                        //VStack(alignment: .leading) { // VStack for Last Minute Buy Start
                         Text("Last minute buy")
                             .font(.headline)
                             .padding(.leading, 20)
@@ -170,7 +171,7 @@ struct HomePageView: View {
                     } // VStack for SkinCare Products End
                     .padding(.horizontal)
                     
-                   CustomAdView(imageName: "wellwomen_ad")
+                    CustomAdView(imageName: "wellwomen_ad")
                     
                     // Uncomment if BottomImage is needed
                     VStack(alignment: .leading) {
@@ -184,8 +185,7 @@ struct HomePageView: View {
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
         .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
-        // Add .bgNavLink for LocationView if needed
-        //.bgNavLink(content: LocationView(), isAction: $showLocation)
+        .bgNavLink(content: LocationView(selectedCity: $selectedCity, isPresented: $showLocation), isAction: $showLocation)
     }
     
     // Method to generate a stack of products based on their type
