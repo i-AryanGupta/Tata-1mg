@@ -10,16 +10,18 @@ import SwiftUI
 struct ProductBasedOnCategory: View {
     var products: [ProductCellData]
     @ObservedObject var cartViewModel: CartViewModel
+    @Binding var showCart: Bool // Add this binding
 
     var body: some View {
         VStack(spacing: 10) {
             ForEach(products) { product in
-                ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
+                SingleDataCell(cartViewModel: cartViewModel, product: product, showCart: $showCart) // Pass the binding
             }
         }
         .padding(.horizontal)
     }
 }
+
 
 
 
@@ -44,7 +46,7 @@ struct ProductBasedOnCategory_Previews: PreviewProvider {
             )
         ]
         
-        ProductBasedOnCategory(products: sampleProducts, cartViewModel: CartViewModel())
+        ProductBasedOnCategory(products: sampleProducts, cartViewModel: CartViewModel(), showCart: .constant(false))
             .previewLayout(.sizeThatFits)
             .padding()
     }

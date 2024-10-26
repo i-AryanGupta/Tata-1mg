@@ -100,7 +100,7 @@ struct CartView: View {
             }
 
             // Cart Bottom Bar View (fixed at the bottom)
-            CartBottomBarView(totalPrice: cartViewModel.totalPrice)
+            CartBottomBarView(cartViewModel: cartViewModel, totalPrice: cartViewModel.totalPrice)
                 .padding(.top, 10)
         }
         .padding(.horizontal)

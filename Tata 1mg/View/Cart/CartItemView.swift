@@ -24,7 +24,7 @@ struct CartItemView: View {
                     Text(item.product.productName)
                         .font(.headline)
                     
-                    Text("Strip of 5 tablets") // Dynamic product description if necessary
+                    Text("Strip of 5 tablets")
                         .font(.caption)
                         .foregroundColor(.gray)
                     
@@ -46,7 +46,6 @@ struct CartItemView: View {
                             .foregroundColor(.green)
                     }
                     
-                    // Remove Button (Optional if needed)
                     Button(action: {
                         // Safely remove the item from the cart without affecting navigation
                         cartViewModel.updateQuantity(for: item.product, quantity: 0)
