@@ -28,20 +28,15 @@ struct HomeTabView: View {
             // Get Care Plan Tab (with custom circular image)
             GetCarePlanView()
                 .tabItem {
-                    ZStack {
-                        Circle()
-                            .frame(width: 50, height: 50)
-                            .foregroundColor(.orange) // Placeholder for circular image background
-                        Text("Care Plan")
-                            .foregroundColor(.white) // Custom text over the circle
-                    }
-                    Text("Get Care Plan") // Label
+                    Image(systemName: "star.fill")
+                    Text("Care Plan")
+                    //CustomCarePlanTabView()
                 }
-            
+
             // Lab Tests Tab
             LabTestsView()
                 .tabItem {
-                    Image(systemName: "flask.fill")
+                    Image(systemName: "book.fill")
                     Text("Lab tests")
                 }
             
@@ -59,24 +54,9 @@ struct HomeTabView: View {
     }
 }
 
-struct GetCarePlanView: View {
-    var body: some View {
-        VStack {
-            Text("This is the Get Care Plan Page")
-                .navigationTitle("Get Care Plan")
-        }
-    }
-}
-
-struct LabTestsView: View {
-    var body: some View {
-        Text("This is the Lab Tests Page")
-            .navigationTitle("Lab Tests")
-    }
-}
-
 //struct HomeTabView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        HomeTabView()
+//            .environmentObject(authViewModel)
 //    }
 //}

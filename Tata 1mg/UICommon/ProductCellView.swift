@@ -17,6 +17,7 @@ struct ProductCellView: View {
                 Image(product.productImages.first ?? "defaultImage") // Use a placeholder if image is unavailable
                     .resizable()
                     .frame(width: 100, height: 100)
+                    .scaledToFit()
                     .cornerRadius(8)
                 
                 VStack(alignment: .leading, spacing: 4) {
