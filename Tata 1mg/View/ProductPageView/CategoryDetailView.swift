@@ -26,7 +26,7 @@ struct CategoryDetailView: View {
                     SideBarProductType(categories: productCategories, selectedCategory: $selectedCategory)
                         .frame(width: 100)
                         .padding(.top)
-                        .background(Color.orange)
+                        //.background(Color.orange)
                 }
 
                 // Products based on selected category
