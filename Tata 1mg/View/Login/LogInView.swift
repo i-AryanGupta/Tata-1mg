@@ -21,7 +21,7 @@ struct LogInView: View {
             VStack(spacing: 20) {
                 Spacer()
                 
-                // Conditionally show the image based on keyboard visibility
+                // Conditionally show the image based on keyboard visibility or not
                 if !isKeyboardVisible {
                     Image("onBoard_3")
                         .resizable()
@@ -76,6 +76,7 @@ struct LogInView: View {
         //.bgNavLink(content: HomeTabView(), isAction: $onSubmit)
         .bgNavLink(content: SignUpView().environmentObject(authViewModel), isAction: $onSignUp)
         .navigationBarBackButtonHidden()
+        //not added
     }
 }
 
