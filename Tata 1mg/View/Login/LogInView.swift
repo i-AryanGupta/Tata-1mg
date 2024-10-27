@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct LogInView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var email = ""
     @State private var password = ""
     @State private var onSubmit = false
     @State private var onSignUp = false
     @State private var isKeyboardVisible = false
+    @State private var loginFailed = false
     
     var body: some View {
         ZStack {
@@ -39,7 +41,16 @@ struct LogInView: View {
                 .padding(.horizontal, 20)
                 
                 CustomButton(title: "Verify") {
-                    onSubmit = true
+                    if authViewModel.logIn(email: email, password: password) {
+                        onSubmit = true // Navigate to HomeTabView
+                    } else {
+                        loginFailed = true // Trigger failure alert or message
+                    }
+                    
+                    if loginFailed {
+                        Text("Incorrect email or password. Please try again.")
+                            .foregroundColor(.red)
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
@@ -61,8 +72,10 @@ struct LogInView: View {
             }
         }
         .keyboardResponsive(isKeyboardVisible: $isKeyboardVisible) // Apply the keyboard responsive modifier
-        .bgNavLink(content: HomeTabView(), isAction: $onSubmit)
-        .bgNavLink(content: SignUpView(), isAction: $onSignUp)
+        .bgNavLink(content: HomeTabView().environmentObject(authViewModel), isAction: $onSubmit)
+        //.bgNavLink(content: HomeTabView(), isAction: $onSubmit)
+        .bgNavLink(content: SignUpView().environmentObject(authViewModel), isAction: $onSignUp)
+        .navigationBarBackButtonHidden()
     }
 }
 

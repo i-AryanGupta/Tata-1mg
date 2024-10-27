@@ -5,7 +5,8 @@
 //  Created by Yashom on 23/10/24.
 //
 
-import Foundation
+import SwiftUI
+
 class CartViewModel: ObservableObject {
     @Published var cartItems: [CartItem] = []
     
@@ -46,7 +47,6 @@ class CartViewModel: ObservableObject {
         cartItems.removeAll()
     }
 }
-
 
 
 

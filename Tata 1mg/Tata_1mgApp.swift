@@ -10,6 +10,7 @@ import SwiftUI
 @main
 struct Tata_1mgApp: App {
     let persistenceController = PersistenceController.shared
+    @StateObject private var authViewModel = AuthViewModel()
 
        var body: some Scene {
            WindowGroup {
@@ -17,6 +18,7 @@ struct Tata_1mgApp: App {
                    
 //                   HomeTabView() // Root View
                    OnboardingScreen()
+                       .environmentObject(authViewModel)
                    //            ContentView()
                    //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 
