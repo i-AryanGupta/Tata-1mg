@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct SignUpView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
-    @State private var onSubmit = false
+    @State private var signUpFailed = false
     @State private var onLogin = false
     @State private var isKeyboardVisible = false
     
@@ -42,10 +43,20 @@ struct SignUpView: View {
                 .padding(.horizontal, 20)
                 
                 CustomButton(title: "Submit") {
-                    onSubmit = true
+                    if authViewModel.signUp(name: name, email: email, password: password) {
+                        onLogin = true // Navigate to LogInView
+                    }else {
+                        signUpFailed = true // Trigger failure alert or message
+                    }
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 10)
+                
+                if signUpFailed {
+                    Text("Email already exists. Try logging in.")
+                        .foregroundColor(.red)
+                        .padding(.top, 10)
+                }
                 
                 HStack {
                     Text("Already have an account?")
@@ -64,8 +75,7 @@ struct SignUpView: View {
             }
         }
         .keyboardResponsive(isKeyboardVisible: $isKeyboardVisible) // Apply the keyboard responsive modifier
-        .bgNavLink(content: LogInView(), isAction: $onSubmit)
-        .bgNavLink(content: LogInView(), isAction: $onLogin)
+        .bgNavLink(content: LogInView().environmentObject(authViewModel), isAction: $onLogin)
     }
 }
 

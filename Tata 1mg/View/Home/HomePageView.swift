@@ -94,9 +94,16 @@ struct HomePageView: View {
                         
                         // Wellness and Medicine product sections
                         VStack(alignment: .leading) { // VStack for Wellness Products Start
-                            Text("Wellness Products")
-                                .font(.headline)
-                                .padding(.leading, 20)
+                            HStack{
+                                Text("Wellness Products")
+                                    .font(.headline)
+                                    .padding(.leading, 20)
+                                Spacer()
+                                
+                                SeeMoreButton()
+                                    .padding(.trailing, 10)
+
+                            }
                             
                             ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Wellness Products Start
                                 HStack(spacing: 20) { // HStack for Wellness Product Stack Start
@@ -128,9 +135,17 @@ struct HomePageView: View {
                     
                     
                     VStack(alignment: .leading) { // VStack for Medicine Products Start
-                        Text("Medicine Products")
-                            .font(.headline)
-                            .padding(.leading, 20)
+                        HStack{
+                            Text("Medicine Products")
+                                .font(.headline)
+                                .padding(.leading, 20)
+                            
+                            Spacer()
+                            
+                            SeeMoreButton()
+                                .padding(.trailing, 10)
+                            
+                        }
                         
                         ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Medicine Products Start
                             HStack(spacing: 20) { // HStack for Medicine Product Stack Start
@@ -142,9 +157,18 @@ struct HomePageView: View {
                         //.padding(.horizontal)
                         
                         //VStack(alignment: .leading) { // VStack for Last Minute Buy Start
-                        Text("Last minute buy")
-                            .font(.headline)
-                            .padding(.leading, 20)
+                        HStack{
+                            Text("Last minute buy")
+                                .font(.headline)
+                                .padding(.leading, 20)
+                            
+                            Spacer()
+                            
+                            SeeMoreButton()
+                                .padding(.trailing, 10)
+                            
+                        }
+                        .padding(.top, 10)
                         
                         ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Last Minute Buy Start
                             HStack(spacing: 20) { // HStack for Last Minute Buy Stack Start
@@ -158,9 +182,16 @@ struct HomePageView: View {
                     CustomAdView(imageName: "tata_ad")
                     
                     VStack(alignment: .leading) { // VStack for SkinCare Products Start
-                        Text("SkinCare Products")
-                            .font(.headline)
-                            .padding(.leading, 20)
+                        HStack{
+                            Text("SkinCare Products")
+                                .font(.headline)
+                                .padding(.leading, 20)
+                            Spacer()
+                            
+                            SeeMoreButton()
+                                .padding(.trailing, 10)
+                            
+                        }
                         
                         ScrollView(.horizontal, showsIndicators: false) { // ScrollView for SkinCare Products Start
                             HStack(spacing: 20) { // HStack for SkinCare Product Stack Start

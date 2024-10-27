@@ -8,7 +8,7 @@
 import Foundation
 
 // ProductCellData represents a product, using a struct for immutability and efficiency
-struct ProductCellData: Identifiable {
+struct ProductCellData: Identifiable{
     var id: String = UUID().uuidString
     var productName: String
     var productImages: [String]

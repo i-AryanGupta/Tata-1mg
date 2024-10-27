@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeTabView: View {
-    
+    @EnvironmentObject var authViewModel: AuthViewModel
     var body: some View {
         TabView {
             // Home Tab
@@ -47,6 +47,7 @@ struct HomeTabView: View {
             
             // Profile Tab
             ProfileView()
+                .environmentObject(authViewModel)
                 .tabItem {
                     Image(systemName: "person.fill")
                     Text("Profile")
@@ -74,8 +75,8 @@ struct LabTestsView: View {
     }
 }
 
-struct HomeTabView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeTabView()
-    }
-}
+//struct HomeTabView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeTabView()
+//    }
+//}
