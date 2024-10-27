@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var showLoginView = false
     @State private var name: String = "there!"
     @State private var subName :String = "Sign in to start your healthcare journey"
     @State private var showSignIn = false
@@ -27,15 +29,21 @@ struct ProfileView: View {
                 
                 VStack(alignment: .leading, spacing: 0) {
                     
-                    Text("hi \(name)")
+                    Text("Hi, \(authViewModel.currentUser?.name ?? "there!")")
                         .font(.title)
                         .fontWeight(.bold)
                     
-                    Text(subName)
+                    Text(authViewModel.isUserLoggedIn ? "Welcome to your healthcare journey" : "Sign in to start your healthcare journey")
                         .font(.subheadline)
                         .foregroundColor(.gray)
-                    CustomButton(title: "Sign in") {
-                        showSignIn = true
+                    
+                    CustomButton(title: authViewModel.isUserLoggedIn ? "Log Out" : "Sign In") {
+                        if authViewModel.isUserLoggedIn {
+                            authViewModel.logOut()
+                            showLoginView = true // Navigate back to LogInView
+                        } else {
+                            showLoginView = true // Navigate to LogInView for sign-in
+                        }
                     }
                     .padding(.vertical,10)
                     
@@ -96,8 +104,7 @@ struct ProfileView: View {
             }
             
         }
-        .bgNavLink(content: LogInView(), isAction: $showSignIn)
-        
+        .bgNavLink(content: LogInView().environmentObject(authViewModel), isAction: $showLoginView)
     }
     
 }

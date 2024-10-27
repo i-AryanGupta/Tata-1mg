@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct OnboardingScreen: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State var showLogin = false
     @State private var selectPage = 0
     @State var pageArr = [
@@ -99,7 +100,7 @@ struct OnboardingScreen: View {
                 
             }
         }
-        .bgNavLink(content: LogInView(), isAction: $showLogin)
+        .bgNavLink(content: LogInView().environmentObject(authViewModel), isAction: $showLogin)
     }
 }
 
