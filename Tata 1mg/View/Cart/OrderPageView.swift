@@ -112,4 +112,3 @@ struct OrderPageView_Previews: PreviewProvider {
             .previewLayout(.sizeThatFits)
     }
 }
-
