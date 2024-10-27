@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+//merging brannch error
 @main
 struct Tata_1mgApp: App {
     let persistenceController = PersistenceController.shared
@@ -16,9 +16,10 @@ struct Tata_1mgApp: App {
            WindowGroup {
                NavigationView {
                    
+                   //HomeTabView()
                    //HomePageView() // Root View
                    OnboardingScreen()
-                       .environmentObject(authViewModel)
+                        .environmentObject(authViewModel)
                    //            ContentView()
                    //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 

@@ -57,6 +57,9 @@
 		2B9242622CC23B100031B39D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B9242612CC23B100031B39D /* Launch Screen.storyboard */; };
 		2B9242652CC2432E0031B39D /* OnboardingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9242642CC2432E0031B39D /* OnboardingScreen.swift */; };
 		2B9242672CC265E60031B39D /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B9242662CC265E60031B39D /* LogInView.swift */; };
+		2BAA9C022CCE554B00E7BF06 /* LabTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA9C012CCE554B00E7BF06 /* LabTabView.swift */; };
+		2BAA9C042CCE56D400E7BF06 /* GetCarePlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA9C032CCE56D400E7BF06 /* GetCarePlanView.swift */; };
+		2BAA9C062CCE677F00E7BF06 /* CustomCarePlanTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BAA9C052CCE677F00E7BF06 /* CustomCarePlanTabView.swift */; };
 		2BE288CF2CCB93AA00AE11AE /* CustoAdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE288CE2CCB93AA00AE11AE /* CustoAdView.swift */; };
 		2BE288D12CCB985C00AE11AE /* CustomImageScroll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE288D02CCB985C00AE11AE /* CustomImageScroll.swift */; };
 		2BE3320B2CC272D10047BFB7 /* ProductCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE3320A2CC272D10047BFB7 /* ProductCellData.swift */; };
@@ -120,6 +123,9 @@
 		2B9242612CC23B100031B39D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2B9242642CC2432E0031B39D /* OnboardingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingScreen.swift; sourceTree = "<group>"; };
 		2B9242662CC265E60031B39D /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		2BAA9C012CCE554B00E7BF06 /* LabTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabTabView.swift; sourceTree = "<group>"; };
+		2BAA9C032CCE56D400E7BF06 /* GetCarePlanView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCarePlanView.swift; sourceTree = "<group>"; };
+		2BAA9C052CCE677F00E7BF06 /* CustomCarePlanTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCarePlanTabView.swift; sourceTree = "<group>"; };
 		2BE288CE2CCB93AA00AE11AE /* CustoAdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustoAdView.swift; sourceTree = "<group>"; };
 		2BE288D02CCB985C00AE11AE /* CustomImageScroll.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageScroll.swift; sourceTree = "<group>"; };
 		2BE3320A2CC272D10047BFB7 /* ProductCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCellData.swift; sourceTree = "<group>"; };
@@ -218,6 +224,8 @@
 				2B216B572CC7938C002AF809 /* HealthPlansView.swift */,
 				2BEAEFC42CC7BEC500B13453 /* ProfileView.swift */,
 				2BEAEFC62CC7BF1400B13453 /* ProfileData.swift */,
+				2BAA9C012CCE554B00E7BF06 /* LabTabView.swift */,
+				2BAA9C032CCE56D400E7BF06 /* GetCarePlanView.swift */,
 			);
 			path = TabView;
 			sourceTree = "<group>";
@@ -307,6 +315,7 @@
 				2B0B79FF2CC632D6005091D4 /* ProductCellDataReusable.swift */,
 				2B2CA1202CCDF11500519944 /* SeeMoreButton.swift */,
 				2B2CA12D2CCE034400519944 /* ProductCellView.swift */,
+				2BAA9C052CCE677F00E7BF06 /* CustomCarePlanTabView.swift */,
 			);
 			path = UICommon;
 			sourceTree = "<group>";
@@ -461,6 +470,7 @@
 				2B2CA1272CCDF78300519944 /* ProductJsonFetchViewModel.swift in Sources */,
 				2B45BB9A2CCA3FAB0066E028 /* ProductViewModel.swift in Sources */,
 				2B45BB932CCA1F680066E028 /* BottomImage.swift in Sources */,
+				2BAA9C062CCE677F00E7BF06 /* CustomCarePlanTabView.swift in Sources */,
 				2B20A35F2CC8C534001F39E9 /* CartView.swift in Sources */,
 				2B0B7A072CC65409005091D4 /* SearchBarProductView.swift in Sources */,
 				2B1BE1DD2CCC9DD3006818EE /* LocationView.swift in Sources */,
@@ -468,10 +478,12 @@
 				2B216B582CC7938C002AF809 /* HealthPlansView.swift in Sources */,
 				2B9242652CC2432E0031B39D /* OnboardingScreen.swift in Sources */,
 				2B45BB982CCA35010066E028 /* ProductPageView.swift in Sources */,
+				2BAA9C022CCE554B00E7BF06 /* LabTabView.swift in Sources */,
 				2B92423D2CC237770031B39D /* Tata_1mgApp.swift in Sources */,
 				2B20A3652CC8CA01001F39E9 /* CartViewModel.swift in Sources */,
 				2B0B7A032CC633BF005091D4 /* PopUpView.swift in Sources */,
 				2B0B79FA2CC626F7005091D4 /* SignUpView.swift in Sources */,
+				2BAA9C042CCE56D400E7BF06 /* GetCarePlanView.swift in Sources */,
 				2B1BE1DF2CCCA24D006818EE /* LoadingView.swift in Sources */,
 				2B20A36B2CC8EA3E001F39E9 /* DetailCart.swift in Sources */,
 				2B2CA1212CCDF11600519944 /* SeeMoreButton.swift in Sources */,
