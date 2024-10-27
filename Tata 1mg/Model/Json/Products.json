@@ -1,0 +1,51 @@
+[
+    {
+        "productName": "Azithromycin",
+        "productImages": ["azit1", "azit2", "azit1"],
+        "productPrice": 150.30,
+        "productDiscountedPrice": 100.00,
+        "deliveryDate": "Delivery by 11pm today",
+        "productType": "Medicine",
+        "productInformation": "Azithromycin is a widely used antibiotic for bacterial infections."
+    },
+    {
+        "productName": "Vicks",
+        "productImages": ["vivks1", "vivks2", "vivks3"],
+        "productPrice": 122.70,
+        "productDiscountedPrice": 99.00,
+        "deliveryDate": "Delivery by 11pm today",
+        "productType": "Medicine",
+        "productInformation": "Vicks Vaporub provides relief from cough, congestion, and muscle aches."
+    },
+    
+    {
+        "productName": "MamaEarth",
+        "productImages": ["mama","mama","mama"],
+        "productPrice": 250.30,
+        "productDiscountedPrice": 190.00,
+        "deliveryDate": "Delivery by 11pm today",
+        "productType": "Medicine",
+        "productInformation": "MamaEarth Skin Cream is a natural, toxin-free cream."
+    },
+    
+    {
+        "productName": "Iodex",
+        "productImages": ["iodex1", "iodex3"],
+        "productPrice": 180.30,
+        "productDiscountedPrice": 149.00,
+        "deliveryDate": "Delivery by 11pm today",
+        "productType": "Medicine",
+        "productInformation": "Iodex is a topical pain relief gel specifically formulated to relieve muscle pain,"
+    },
+    
+    {
+        "productName": "Pill",
+        "productImages": ["pills2", "pills1", "pills3"],
+        "productPrice": 150.30,
+        "productDiscountedPrice": 125.30,
+        "deliveryDate": "Delivery by 11pm today",
+        "productType": "Medicine",
+        "productInformation": "This generic pain relief pill contains paracetamol (acetaminophen)."
+    }
+    
+]

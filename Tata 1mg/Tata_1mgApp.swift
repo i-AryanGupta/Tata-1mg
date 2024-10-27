@@ -16,7 +16,7 @@ struct Tata_1mgApp: App {
            WindowGroup {
                NavigationView {
                    
-//                   HomeTabView() // Root View
+                   //HomePageView() // Root View
                    OnboardingScreen()
                        .environmentObject(authViewModel)
                    //            ContentView()
