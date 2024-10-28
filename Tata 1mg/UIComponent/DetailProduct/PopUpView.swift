@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct PopupView: View {
-    @Binding var addedProducts: Int
     @Binding var isPresented: Bool
-    @ObservedObject var cartViewModel: CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel // Use as EnvironmentObject
     var product: ProductCellData
     let options: [String]
 
@@ -22,24 +21,24 @@ struct PopupView: View {
 
                 ForEach(options, id: \.self) { option in
                     Button(action: {
-                        selectProduct(option)
+                        let selectedQuantity = Int(option) ?? 1
+                        cartViewModel.updateQuantity(for: product.id, quantity: selectedQuantity)
                         isPresented = false // Close the popup
                     }) {
                         HStack {
                             Text(option)
                                 .padding()
                             Spacer()
-                            Image(systemName: addedProducts == Int(option) ? "checkmark.circle.fill" : "plus.circle")
-                                .foregroundColor(addedProducts == Int(option) ? .orange : .black)
+                            Image(systemName: cartViewModel.quantity(for: product.id) == Int(option) ? "checkmark.circle.fill" : "plus.circle")
+                                .foregroundColor(cartViewModel.quantity(for: product.id) == Int(option) ? .orange : .black)
                         }
-                        .background(addedProducts == Int(option) ? .orange.opacity(0.2) : .white)
+                        .background(cartViewModel.quantity(for: product.id) == Int(option) ? .orange.opacity(0.2) : .white)
                     }
                 }
 
                 Button("Clear Products") {
-                    addedProducts = 0 // Clear the quantity
-                    cartViewModel.updateQuantity(for: product, quantity: 0) // Remove the product from the cart
-                    isPresented = false // Dismiss the popup
+                    cartViewModel.updateQuantity(for: product.id, quantity: 0)
+                    isPresented = false
                 }
                 .padding()
                 .background(Color.red)
@@ -49,13 +48,5 @@ struct PopupView: View {
             .padding()
         }
     }
-
-    private func selectProduct(_ option: String) {
-        addedProducts = Int(option) ?? 1 // Update the selected quantity
-
-        // Update the cart with the selected quantity
-        if addedProducts > 0 {
-            cartViewModel.updateQuantity(for: product, quantity: addedProducts)
-        }
-    }
 }
+

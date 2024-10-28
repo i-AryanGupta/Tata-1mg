@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CartBottomBarView: View {
     @State private var showOrderNow = false
-    var cartViewModel: CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     var totalPrice: Double
 
     var body: some View {

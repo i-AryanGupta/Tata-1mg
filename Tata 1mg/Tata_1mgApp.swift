@@ -11,15 +11,19 @@ import SwiftUI
 struct Tata_1mgApp: App {
     let persistenceController = PersistenceController.shared
     @StateObject private var authViewModel = AuthViewModel()
+    @StateObject private var cartViewModel = CartViewModel(products: JSONLoader.loadProductData())
 
        var body: some Scene {
            WindowGroup {
                NavigationView {
                    
-                   //HomeTabView()
+                   
                    //HomePageView() // Root View
+                   //
+                   //HomeTabView()
                    OnboardingScreen()
-                        .environmentObject(authViewModel)
+                       .environmentObject(authViewModel)
+                       .environmentObject(cartViewModel)
                    //            ContentView()
                    //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
 

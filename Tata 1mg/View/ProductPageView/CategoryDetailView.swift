@@ -8,14 +8,19 @@
 import SwiftUI
 
 struct CategoryDetailView: View {
+    @EnvironmentObject var cartViewModel: CartViewModel // Use shared CartViewModel
     @State private var selectedCategory: String = "Medicine"
     @State private var showCart = false
-    @ObservedObject var cartViewModel: CartViewModel
 
-    let productCategories = Array(Set(ProductsFile().productCellData.map { $0.productType }))
-
+    // Load products from JSON and initialize categories based on product types
+    let allProducts: [ProductCellData] = JSONLoader.loadProductData()
+    var productCategories: [String] {
+        Array(Set(allProducts.map { $0.productType })).sorted()
+    }
+    
+    // Filtered products based on the selected category
     var products: [ProductCellData] {
-        ProductsFile().productCellData.filter { $0.productType == selectedCategory }
+        allProducts.filter { $0.productType == selectedCategory }
     }
 
     var body: some View {
@@ -26,23 +31,23 @@ struct CategoryDetailView: View {
                     SideBarProductType(categories: productCategories, selectedCategory: $selectedCategory)
                         .frame(width: 100)
                         .padding(.top)
-                        //.background(Color.orange)
                 }
 
                 // Products based on selected category
                 ScrollView(.vertical, showsIndicators: true) {
                     VStack {
-                        ProductBasedOnCategory(products: products, cartViewModel: cartViewModel, showCart: $showCart)
+                        ProductBasedOnCategory(products: products, showCart: $showCart)
+                            .environmentObject(cartViewModel) // Inject environment object
                     }
                 }
             }
             .navigationTitle("Cold, Cough & Fever")
             .navigationBarItems(trailing: cartButton)
             .overlay(
-                NavigationLink(destination: CartView(cartViewModel: cartViewModel), isActive: $showCart) {
+                NavigationLink(destination: CartView(), isActive: $showCart) {
                     EmptyView()
                 }
-                .transition(.move(edge: .trailing)) // Transition from the right
+                .transition(.move(edge: .trailing))
             )
         }
     }
@@ -50,7 +55,7 @@ struct CategoryDetailView: View {
     // Cart Button in the navigation bar
     private var cartButton: some View {
         Button(action: {
-            showCart = true // Open the cart
+            showCart = true
         }) {
             ZStack {
                 Image(systemName: "cart.fill")
@@ -73,14 +78,13 @@ struct CategoryDetailView: View {
     }
 }
 
+//struct CategoryDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CategoryDetailView(cartViewModel: CartViewModel())
+//            .previewLayout(.sizeThatFits)
+//            .padding()
+//    }
+//}
 
-
-struct CategoryDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CategoryDetailView(cartViewModel: CartViewModel())
-            .previewLayout(.sizeThatFits)
-            .padding()
-    }
-}
 
 

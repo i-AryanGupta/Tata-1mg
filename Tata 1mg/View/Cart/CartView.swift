@@ -9,8 +9,7 @@
 import SwiftUI
 
 struct CartView: View {
-   @ObservedObject var cartViewModel: CartViewModel
-    let productsFile = ProductsFile()
+    @EnvironmentObject var cartViewModel: CartViewModel // Shared CartViewModel instance
 
     var body: some View {
         VStack {
@@ -45,15 +44,13 @@ struct CartView: View {
                 // Cart Items List
                 VStack {
                     ForEach(cartViewModel.cartItems) { item in
-                        CartItemView(item: item, cartViewModel: cartViewModel)
-                            .id(item.id) // Ensure SwiftUI tracks items individually and prevents re-rendering issues
+                        CartItemView(item: item)
+                            .id(item.id)
                     }
                 }
 
                 // Apply Coupon Section
-                Button(action: {
-                    // Apply coupon action
-                }) {
+                Button(action: applyCoupon) {
                     HStack {
                         Image(systemName: "tag")
                         Text("Apply coupon")
@@ -96,64 +93,61 @@ struct CartView: View {
                 // Bill Summary
                 BillSummaryView(totalPrice: cartViewModel.totalPrice, totalSavings: cartViewModel.totalSavings)
 
-                BottomImage() // Display an additional image if needed
+                BottomImage()
             }
 
-            // Cart Bottom Bar View (fixed at the bottom)
-            CartBottomBarView(cartViewModel: cartViewModel, totalPrice: cartViewModel.totalPrice)
+            // Cart Bottom Bar View
+            CartBottomBarView(totalPrice: cartViewModel.totalPrice)
                 .padding(.top, 10)
         }
         .padding(.horizontal)
-        .onAppear {
-            // Reset navigation flags when the cart appears
-        }
-        .onDisappear {
-            // Ensure navigation state is not unintentionally affected after cart updates
-        }
     }
 
     // Function to filter and display products by type, similar to HomePageView
     func productStack(for type: String) -> some View {
-        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
+        let filteredProducts = cartViewModel.products.filter { $0.productType == type }
         return ForEach(filteredProducts) { product in
-            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
-                .id(product.id) // Ensure that SwiftUI tracks individual products properly
+            ProductCellDataReusable(product: product)
+                .environmentObject(cartViewModel)
+                .id(product.id)
         }
     }
-}
 
-
-
-struct CartView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Create a sample CartViewModel with some products
-        let sampleCartViewModel = CartViewModel()
-        
-        // Add some sample items to the cart
-        let sampleProduct1 = ProductCellData(
-            productName: "Azithromycin",
-            productImages: ["azit1"],
-            productPrice: 150.30,
-            productDiscountedPrice: 100.00,
-            productType: "Medicine",
-            productInformation: "Azithromycin is a commonly used antibiotic for treating bacterial infections."
-        )
-        let sampleProduct2 = ProductCellData(
-            productName: "Paracetamol",
-            productImages: ["pills1"],
-            productPrice: 120.00,
-            productDiscountedPrice: 90.00,
-            productType: "Medicine",
-            productInformation: "Paracetamol is used for pain relief and fever reduction."
-        )
-
-        // Add these products as cart items
-        sampleCartViewModel.addToCart(product: sampleProduct1)
-        sampleCartViewModel.addToCart(product: sampleProduct2)
-
-        // Show the CartView in preview with the sample data
-        return CartView(cartViewModel: sampleCartViewModel)
-            .previewLayout(.sizeThatFits) // Adjust preview size
-            .padding()
+    private func applyCoupon() {
+        print("Coupon applied")
     }
 }
+
+
+// Preview
+//struct CartView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let sampleCartViewModel = CartViewModel()
+//
+//        let sampleProduct1 = ProductCellData(
+//            productName: "Azithromycin",
+//            productImages: ["azit1"],
+//            productPrice: 150.30,
+//            productDiscountedPrice: 100.00,
+//            deliveryDate: "11-12",
+//            productType: "Medicine",
+//            productInformation: "Azithromycin is a commonly used antibiotic for treating bacterial infections."
+//        )
+//        let sampleProduct2 = ProductCellData(
+//            productName: "Paracetamol",
+//            productImages: ["pills1"],
+//            productPrice: 120.00,
+//            productDiscountedPrice: 90.00,
+//            deliveryDate: "11-12",
+//            productType: "Medicine",
+//            productInformation: "Paracetamol is used for pain relief and fever reduction."
+//        )
+//
+//        sampleCartViewModel.addToCart(product: sampleProduct1)
+//        sampleCartViewModel.addToCart(product: sampleProduct2)
+//
+//        return CartView(cartViewModel: sampleCartViewModel)
+//            .previewLayout(.sizeThatFits)
+//            .padding()
+//    }
+//}
