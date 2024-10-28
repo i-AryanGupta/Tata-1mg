@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LogInView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     @State private var email = ""
     @State private var password = ""
     @State private var onSubmit = false
@@ -72,7 +73,7 @@ struct LogInView: View {
             }
         }
         .keyboardResponsive(isKeyboardVisible: $isKeyboardVisible) // Apply the keyboard responsive modifier
-        .bgNavLink(content: HomeTabView().environmentObject(authViewModel), isAction: $onSubmit)
+        .bgNavLink(content: HomeTabView().environmentObject(authViewModel).environmentObject(cartViewModel), isAction: $onSubmit)
         //.bgNavLink(content: HomeTabView(), isAction: $onSubmit)
         .bgNavLink(content: SignUpView().environmentObject(authViewModel), isAction: $onSignUp)
         .navigationBarBackButtonHidden()

@@ -9,34 +9,48 @@ import SwiftUI
 
 struct HomePageView: View {
     @State private var searchText: String = ""
-    @StateObject private var cartViewModel = CartViewModel()
     @State private var showCart = false
     @State private var showLocation = false
     @State private var selectedCity: String = "Bangalore"
-    let productsFile = ProductsFile()
     
-    // Sample data for health essentials
-        let healthEssentials = [
-            (name: "Stomach Care", image: "azit2"),
-            (name: "Cold & Cough", image: "vivks1"),
-            (name: "Pain Relief", image: "iodex1"),
-            (name: "First Aid", image: "paracetamol"),
-            (name: "Diabetes", image: "pills1"),
-            (name: "Eye & Ear Care", image: "azit1")
-        ]
+    // Load products from JSON
+    let products: [ProductCellData]
+    
+    // Initialize CartViewModel with loaded products
+    @EnvironmentObject private var cartViewModel: CartViewModel
+    
+    init() {
+        // Load products from JSON
+        let loadedProducts = JSONLoader.loadProductData()
+        
+        // Debug: Print loaded products and their types
+        print("Loaded Products:", loadedProducts)
+        loadedProducts.forEach { product in
+            print("Product Type:", product.productType)
+        }
+        
+        // Initialize products
+        self.products = loadedProducts
+    }
 
     
+    let healthEssentials = [
+        (name: "Stomach Care", image: "azit2"),
+        (name: "Cold & Cough", image: "vivks1"),
+        (name: "Pain Relief", image: "iodex1"),
+        (name: "First Aid", image: "paracetamol"),
+        (name: "Diabetes", image: "pills1"),
+        (name: "Eye & Ear Care", image: "azit1")
+    ]
+    
     var body: some View {
-        NavigationView { // NavigationView Start
-            ScrollView { // ScrollView Start
-                VStack(spacing: 30) { // VStack Start
-                    
+        NavigationView {
+            ScrollView {
+                VStack(spacing: 30) {
                     // Top bar with Location and Cart buttons
-                    HStack { // HStack for Top Bar Start
-                        Button(action: {
-                            showLocation = true
-                        }) {
-                            HStack { // HStack for Location Button Start
+                    HStack {
+                        Button(action: { showLocation = true }) {
+                            HStack {
                                 Image(systemName: "location.fill")
                                     .font(.title3)
                                     .foregroundColor(Color.white)
@@ -47,22 +61,18 @@ struct HomePageView: View {
                                 Text(selectedCity)
                                     .font(.headline)
                                     .foregroundColor(Color.primaryText)
-                            } // HStack for Location Button End
+                            }
                         }
-                        
                         Spacer()
-                        
-                        Button(action: {
-                            showCart = true
-                        }) {
-                            HStack { // HStack for Cart Button Start
+                       
+                        Button(action: { showCart = true }) {
+                            HStack {
                                 Image(systemName: "cart.fill")
                                     .frame(width: 40, height: 40)
                                     .foregroundColor(Color.white)
                                     .background(Color.gray.opacity(0.5))
                                     .cornerRadius(22)
                                 
-                                // Show the cart count dynamically
                                 if cartViewModel.cartItems.count > 0 {
                                     Text("\(cartViewModel.cartItems.count)")
                                         .font(.caption)
@@ -73,48 +83,39 @@ struct HomePageView: View {
                                         .clipShape(Circle())
                                         .offset(x: -10, y: -10)
                                 }
-                            } // HStack for Cart Button End
+                            }
                         }
-                    } // HStack for Top Bar End
-                    .padding(.leading, 20)
-                    .padding(.trailing, 20)
+                    }
+                    .padding(.horizontal, 20)
                     
                     VStack(spacing: 15){
                         SearchBarProductView()
-                            .padding(.leading, 10)
-                            .padding(.trailing, 10)
+                            .padding(.horizontal, 10)
                         
-                        // Top section (could be promotions, categories, etc.)
                         TopSelfSection()
-                            .padding(.leading, 20)
-                            .padding(.trailing, 20)
-                            .padding(.top, 10)
+                            .padding([.leading, .trailing, .top], 20)
                         
                         CustomImageScroll(imageNames: ["hair_poster", "med_poster", "fever_poster", "equip_poster"])
                         
                         // Wellness and Medicine product sections
-                        VStack(alignment: .leading) { // VStack for Wellness Products Start
+                        VStack(alignment: .leading) {
                             HStack{
                                 Text("Wellness Products")
                                     .font(.headline)
                                     .padding(.leading, 20)
                                 Spacer()
-                                
                                 SeeMoreButton()
                                     .padding(.trailing, 10)
-
                             }
                             
-                            ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Wellness Products Start
-                                HStack(spacing: 20) { // HStack for Wellness Product Stack Start
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
                                     productStack(for: "Wellness")
-                                } // HStack for Wellness Product Stack End
+                                }
                                 .padding(.horizontal)
-                            } // ScrollView for Wellness Products End
-                        } // VStack for Wellness Products End
+                            }
+                        }
                         .padding(.horizontal)
-                        
-                        //personal care
                     }
                     
                     // Health Essentials Grid
@@ -125,7 +126,7 @@ struct HomePageView: View {
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())], spacing: 20) {
                             ForEach(healthEssentials, id: \.name) { item in
-                                NavigationLink(destination: CategoryDetailView(cartViewModel: cartViewModel)) {
+                                NavigationLink(destination: CategoryDetailView()) {
                                     SpecificProductCell(data: item.name, image: item.image)
                                 }
                             }
@@ -133,106 +134,116 @@ struct HomePageView: View {
                         .padding(.horizontal, 20)
                     }
                     
-                    
-                    VStack(alignment: .leading) { // VStack for Medicine Products Start
-                        HStack{
+                    VStack(alignment: .leading) {
+                        HStack {
                             Text("Medicine Products")
                                 .font(.headline)
                                 .padding(.leading, 20)
-                            
                             Spacer()
-                            
                             SeeMoreButton()
                                 .padding(.trailing, 10)
-                            
                         }
                         
-                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Medicine Products Start
-                            HStack(spacing: 20) { // HStack for Medicine Product Stack Start
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
                                 productStack(for: "Medicine")
-                            } // HStack for Medicine Product Stack End
+                            }
                             .padding(.horizontal)
-                        } // ScrollView for Medicine Products End
-                        //} // VStack for Medicine Products End
-                        //.padding(.horizontal)
+                        }
                         
-                        //VStack(alignment: .leading) { // VStack for Last Minute Buy Start
-                        HStack{
+                        HStack {
                             Text("Last minute buy")
                                 .font(.headline)
                                 .padding(.leading, 20)
-                            
                             Spacer()
-                            
                             SeeMoreButton()
                                 .padding(.trailing, 10)
-                            
                         }
                         .padding(.top, 10)
                         
-                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for Last Minute Buy Start
-                            HStack(spacing: 20) { // HStack for Last Minute Buy Stack Start
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
                                 productStack(for: "Medicine")
-                            } // HStack for Last Minute Buy Stack End
+                            }
                             .padding(.horizontal)
-                        } // ScrollView for Last Minute Buy End
-                    } // VStack for Last Minute Buy End
+                        }
+                    }
                     .padding(.horizontal)
                     
                     CustomAdView(imageName: "tata_ad")
                     
-                    VStack(alignment: .leading) { // VStack for SkinCare Products Start
+                    VStack(alignment: .leading) {
                         HStack{
                             Text("SkinCare Products")
                                 .font(.headline)
                                 .padding(.leading, 20)
                             Spacer()
-                            
                             SeeMoreButton()
                                 .padding(.trailing, 10)
-                            
                         }
                         
-                        ScrollView(.horizontal, showsIndicators: false) { // ScrollView for SkinCare Products Start
-                            HStack(spacing: 20) { // HStack for SkinCare Product Stack Start
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 20) {
                                 productStack(for: "Wellness")
-                            } // HStack for SkinCare Product Stack End
+                            }
                             .padding(.horizontal)
-                        } // ScrollView for SkinCare Products End
-                    } // VStack for SkinCare Products End
+                        }
+                    }
                     .padding(.horizontal)
                     
                     CustomAdView(imageName: "wellwomen_ad")
-                    
-                    // Uncomment if BottomImage is needed
                     VStack(alignment: .leading) {
                         BottomImage()
                     }
-                    
-                    
-                } // Main VStack End
-            } // ScrollView End
-        } // NavigationView End
+                }
+            }
+        }
         .ignoresSafeArea()
         .navigationBarBackButtonHidden()
-        .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
+        .bgNavLink(content: CartView().environmentObject(cartViewModel), isAction: $showCart)
         .bgNavLink(content: LocationView(selectedCity: $selectedCity, isPresented: $showLocation), isAction: $showLocation)
+        .environmentObject(cartViewModel)
     }
     
-    // Method to generate a stack of products based on their type
     func productStack(for type: String) -> some View {
-        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
-        
+        let filteredProducts = products.filter { $0.productType == type }
+        print("Filtered Products for type \(type): \(filteredProducts)")
         return ForEach(filteredProducts) { product in
-            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
+            ProductCellDataReusable(product: product)
+                .id(product.id) // Ensure that SwiftUI tracks each product individually
         }
     }
-} // HomePageView End
 
-
+}
 
 struct HomePageView_Previews: PreviewProvider {
     static var previews: some View {
+        let sampleProducts = [
+            ProductCellData(
+                productName: "Sample Product 1",
+                productImages: ["defaultImage"],
+                productPrice: 100.0,
+                productDiscountedPrice: 80.0,
+                deliveryDate: "11-12",
+                productType: "Wellness",
+                productInformation: "Sample information for product 1"
+            ),
+            ProductCellData(
+                productName: "Sample Product 2",
+                productImages: ["defaultImage"],
+                productPrice: 150.0,
+                productDiscountedPrice: 120.0,
+                deliveryDate: "11-12",
+                productType: "Medicine",
+                productInformation: "Sample information for product 2"
+            )
+        ]
+        
+        let cartViewModel = CartViewModel(products: sampleProducts)
+        
         HomePageView()
+            .environmentObject(cartViewModel)
+            .previewDevice("iPhone 12")
     }
 }
+

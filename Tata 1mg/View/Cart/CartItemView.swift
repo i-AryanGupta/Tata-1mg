@@ -8,7 +8,7 @@ import SwiftUI
 
 struct CartItemView: View {
     var item: CartItem
-    @ObservedObject var cartViewModel: CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     
     var body: some View {
         VStack {
@@ -48,7 +48,8 @@ struct CartItemView: View {
                     
                     Button(action: {
                         // Safely remove the item from the cart without affecting navigation
-                        cartViewModel.updateQuantity(for: item.product, quantity: 0)
+                        cartViewModel.updateQuantity(for: item.product.id, quantity: 0)
+
                     }) {
                         Text("Remove")
                             .font(.caption)
@@ -62,7 +63,7 @@ struct CartItemView: View {
                     Button(action: {
                         if item.quantity > 1 {
                             // Safely update the quantity in the cart
-                            cartViewModel.updateQuantity(for: item.product, quantity: item.quantity - 1)
+                            cartViewModel.updateQuantity(for: item.product.id, quantity: item.quantity - 1)
                         }
                     }) {
                         Image(systemName: "minus")
@@ -77,7 +78,7 @@ struct CartItemView: View {
 
                     Button(action: {
                         // Safely update the quantity in the cart
-                        cartViewModel.updateQuantity(for: item.product, quantity: item.quantity + 1)
+                        cartViewModel.updateQuantity(for: item.product.id, quantity: item.quantity + 1)
                     }) {
                         Image(systemName: "plus")
                             .frame(width: 30, height: 30)

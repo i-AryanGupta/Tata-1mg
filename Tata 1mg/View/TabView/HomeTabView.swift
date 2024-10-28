@@ -9,10 +9,13 @@ import SwiftUI
 
 struct HomeTabView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
+    
     var body: some View {
         TabView {
             // Home Tab
             HomePageView()
+                .environmentObject(cartViewModel)
                 .tabItem {
                     Image(systemName: "house.fill")
                     Text("Home")

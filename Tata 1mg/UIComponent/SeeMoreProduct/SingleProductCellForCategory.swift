@@ -8,10 +8,9 @@
 import SwiftUI
 
 struct SingleDataCell: View {
-    @ObservedObject var cartViewModel: CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel // Use shared CartViewModel
     var product: ProductCellData
     @State private var showProductPage = false
-    @State private var isAdded = false
     @Binding var showCart: Bool
 
     var body: some View {
@@ -35,11 +34,11 @@ struct SingleDataCell: View {
                 
                 // Price, Discounted Price, and Off Percentage in the same line
                 HStack {
-                    Text("₹\(Int(product.productDiscountedPrice))") // Removing decimal points
+                    Text("₹\(Int(product.productDiscountedPrice))")
                         .fontWeight(.bold)
                         .font(.subheadline)
                     
-                    Text("₹\(Int(product.productPrice))") // Removing decimal points
+                    Text("₹\(Int(product.productPrice))")
                         .strikethrough()
                         .font(.subheadline)
                         .foregroundColor(.gray)
@@ -53,14 +52,14 @@ struct SingleDataCell: View {
                 // Add Button below the price line
                 Button(action: {
                     cartViewModel.addToCart(product: product)
-                    isAdded = true
                     showCart = true
                 }) {
-                    Text(isAdded ? "Added" : "ADD")
-                        .foregroundColor(isAdded ? .white : .red)
+                    let quantity = cartViewModel.quantity(for: product.id)
+                    Text(quantity > 0 ? "\(quantity) added" : "ADD")
+                        .foregroundColor(quantity > 0 ? .white : .red)
                         .padding(10)
                         .frame(maxWidth: .infinity)
-                        .background(isAdded ? Color.orange : Color.white)
+                        .background(quantity > 0 ? Color.orange : Color.white)
                         .cornerRadius(5)
                         .overlay(
                             RoundedRectangle(cornerRadius: 5)
@@ -75,28 +74,31 @@ struct SingleDataCell: View {
         .onTapGesture {
             showProductPage = true // Navigate to ProductPageView
         }
-        .bgNavLink(content: ProductPageView(cartViewModel: cartViewModel, productViewModel: ProductViewModel(product: product)), isAction: $showProductPage)
+        .bgNavLink(content: ProductPageView(productViewModel: ProductViewModel(product: product)), isAction: $showProductPage)
+        .environmentObject(cartViewModel) // Pass cartViewModel down to ProductPageView
         Divider()
     }
 }
 
 
 
-struct SingleDataCell_Previews: PreviewProvider {
-    static var previews: some View {
-        let sampleProduct = ProductCellData(
-            productName: "Azithromycin",
-            productImages: ["pills1"],
-            productPrice: 150.00,
-            productDiscountedPrice: 100.00,
-            productType: "Medicine",
-            productInformation: "Antibiotic used to treat bacterial infections."
-        )
 
-        SingleDataCell(cartViewModel: CartViewModel(), product: sampleProduct, showCart: .constant(false))
-            .previewLayout(.sizeThatFits)
-            .padding()
-    }
-}
+//struct SingleDataCell_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let sampleProduct = ProductCellData(
+//            productName: "Azithromycin",
+//            productImages: ["pills1"],
+//            productPrice: 150.00,
+//            productDiscountedPrice: 100.00,
+//            deliveryDate: "11-12",
+//            productType: "Medicine",
+//            productInformation: "Antibiotic used to treat bacterial infections."
+//        )
+//
+//        SingleDataCell(cartViewModel: CartViewModel(), product: sampleProduct, showCart: .constant(false))
+//            .previewLayout(.sizeThatFits)
+//            .padding()
+//    }
+//}
 
 

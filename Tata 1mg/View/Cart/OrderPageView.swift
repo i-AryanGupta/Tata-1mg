@@ -91,6 +91,7 @@ struct OrderPageView_Previews: PreviewProvider {
             productImages: ["azit1"],
             productPrice: 150.30,
             productDiscountedPrice: 100.00,
+            deliveryDate: "11-12",
             productType: "Medicine",
             productInformation: "Azithromycin is a commonly used antibiotic for treating bacterial infections."
         )
@@ -99,6 +100,7 @@ struct OrderPageView_Previews: PreviewProvider {
             productImages: ["pills1"],
             productPrice: 120.00,
             productDiscountedPrice: 90.00,
+            deliveryDate: "11-12",
             productType: "Medicine",
             productInformation: "Paracetamol is used for pain relief and fever reduction."
         )

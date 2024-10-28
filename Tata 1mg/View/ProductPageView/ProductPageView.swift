@@ -9,10 +9,9 @@ import SwiftUI
 
 
 struct ProductPageView: View {
-    @ObservedObject var cartViewModel: CartViewModel // Directly pass CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel // Shared instance of CartViewModel
     @ObservedObject var productViewModel: ProductViewModel
     @State private var showCart = false
-    let productsFile = ProductsFile()
 
     var body: some View {
         VStack {
@@ -28,7 +27,7 @@ struct ProductPageView: View {
                                     .cornerRadius(10)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 10)
-                                            .stroke(Color.gray.opacity(0.2), lineWidth: 1) // Change the color and line width as needed
+                                            .stroke(Color.gray.opacity(0.2), lineWidth: 1)
                                     )
                             }
                         }
@@ -74,10 +73,8 @@ struct ProductPageView: View {
                     .padding(.horizontal)
                     
                     DetailCart()
-                        .padding(.leading, 10)
-                        .padding(.trailing, 10)
-                        
-
+                        .padding(.horizontal, 10)
+                    
                     VStack(alignment: .leading, spacing: 10) {
                         Text("Product Description")
                             .font(.headline)
@@ -119,14 +116,15 @@ struct ProductPageView: View {
             }
         }
         .navigationBarItems(trailing: cartButton)
-        .bgNavLink(content: CartView(cartViewModel: cartViewModel), isAction: $showCart)
+        .bgNavLink(content: CartView().environmentObject(cartViewModel), isAction: $showCart)
     }
     
     func productStack(for type: String) -> some View {
-        let filteredProducts = productsFile.productCellData.filter { $0.productType == type }
+        let filteredProducts = JSONLoader.loadProductData().filter { $0.productType == type }
         return ForEach(filteredProducts) { product in
-            ProductCellDataReusable(cartViewModel: cartViewModel, product: product)
-                .id(product.id) // Ensure that SwiftUI tracks individual products properly
+            ProductCellDataReusable(product: product)
+                .environmentObject(cartViewModel) // Pass environment object to child view
+                .id(product.id)
         }
     }
 
@@ -155,28 +153,21 @@ struct ProductPageView: View {
     }
 }
 
-
-
- //Preview
-struct ProductPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        // Create a sample CartViewModel for the preview
-        let sampleCartViewModel = CartViewModel()
-
-        // Create a sample product
-        let sampleProduct = ProductCellData(
-            productName: "Azithromycin",
-            productImages: ["azit1", "azit2"],
-            productPrice: 150.30,
-            productDiscountedPrice: 100.00,
-            productType: "Medicine",
-            productInformation: """
-            Azithromycin is a widely used antibiotic that is particularly effective against a broad range of bacterial infections. It belongs to the macrolide class of antibiotics and works by preventing bacteria from growing by interfering with their protein synthesis. Azithromycin is commonly prescribed for respiratory tract infections, including pneumonia, bronchitis, sinusitis, as well as ear infections, skin infections, and sexually transmitted infections such as chlamydia.
-            """
-        )
-
-        // Pass the product and the CartViewModel to the ProductPageView preview
-        return ProductPageView(cartViewModel: sampleCartViewModel, productViewModel: ProductViewModel(product: sampleProduct))
-                    
-            }
-}
+// Preview
+//struct ProductPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let sampleCartViewModel = CartViewModel()
+//        let sampleProduct = ProductCellData(
+//            productName: "Azithromycin",
+//            productImages: ["azit1", "azit2"],
+//            productPrice: 150.30,
+//            productDiscountedPrice: 100.00,
+//            deliveryDate: "11-12",
+//            productType: "Medicine",
+//            productInformation: """
+//            Azithromycin is a widely used antibiotic that is particularly effective against a broad range of bacterial infections...
+//            """
+//        )
+//        return ProductPageView(cartViewModel: sampleCartViewModel, productViewModel: ProductViewModel(product: sampleProduct))
+//    }
+//}

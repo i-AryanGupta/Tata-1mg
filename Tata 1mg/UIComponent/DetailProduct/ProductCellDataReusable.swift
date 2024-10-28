@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct ProductCellDataReusable: View {
-    @ObservedObject var cartViewModel: CartViewModel // Directly pass CartViewModel
+    @EnvironmentObject var cartViewModel: CartViewModel
     var product: ProductCellData
     @State private var showPopup = false
     @State private var showProductPage = false
-    @State private var quantity = 0
     
     var body: some View {
         ZStack {
@@ -41,10 +40,10 @@ struct ProductCellDataReusable: View {
                 showProductPage = true
             }
             .bgNavLink(
-                content: ProductPageView(cartViewModel: cartViewModel, productViewModel: ProductViewModel(product: product)),
+                content: ProductPageView(productViewModel: ProductViewModel(product: product)),
                 isAction: $showProductPage
             )
-            
+
             if showPopup {
                 popupOverlay
             }
@@ -85,7 +84,9 @@ struct ProductCellDataReusable: View {
     }
     
     private func addButton() -> some View {
-        Button(action: {
+        let quantity = cartViewModel.quantity(for: product.id)
+        
+        return Button(action: {
             showPopup = true
         }, label: {
             if quantity > 0 {
@@ -111,40 +112,16 @@ struct ProductCellDataReusable: View {
             Color.black.opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
             
-            PopupView(addedProducts: $quantity, isPresented: $showPopup, cartViewModel: cartViewModel, product: product, options: ["1", "2", "3"])
-                .frame(width: 300, height: 350)
-                .background(Color.white)
-                .cornerRadius(10)
-                .shadow(radius: 20)
+            PopupView(
+                isPresented: $showPopup,
+                product: product,
+                options: ["1", "2", "3"]
+            )
+            .environmentObject(cartViewModel) // Provide the environment object here
+            .frame(width: 300, height: 350)
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 20)
         }
-    }
-}
-
-
-
-
-struct ProductCellDataReusable_Previews: PreviewProvider {
-    static var previews: some View {
-        // Create a mock product
-        let sampleProduct = ProductCellData(
-            productName: "Paracetamol",
-            productImages: ["pills1"],
-            productPrice: 150.00,
-            productDiscountedPrice: 125.00,
-            productType: "Medicine",
-            productInformation: "Effective pain relief for headaches and muscle pain."
-        )
-        
-        // Create a mock CartViewModel
-        let mockCartViewModel = CartViewModel()
-
-        // Return the preview of the reusable cell with sample data
-        ProductCellDataReusable(
-            cartViewModel: mockCartViewModel,
-            product: sampleProduct
-        )
-        .previewLayout(.sizeThatFits) // Ensures the preview fits the content
-        .padding()
-        
     }
 }
